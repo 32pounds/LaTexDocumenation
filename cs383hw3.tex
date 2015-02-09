@@ -11,10 +11,10 @@
 \maketitle
 \clearpage
 
-\begin{chapter}{Initial Requirements}
-\begin{subsection}{Functional}
+\chapter{Initial Requirements}
+\section{Functional}
 %enter functional requirements here
-A functional requirement describes what a software system should do.\\
+A functional requirement describes what a software system should do.
 
 \begin{enumerate}
 \item Plays as standalone or multiplayer, scaling up to 27 players
@@ -24,9 +24,8 @@ A functional requirement describes what a software system should do.\\
 \item levels k+1..m are \textbf{cyber} levels, with death=dumped out of cyberspace. Tron-like. Emphasis is on knowledge discovery, resouce acquisition, virus combat. Interface is tile-based, 2D graphical, nethacklike. Real-time until you hit \textbf{engagements} by entering enemy zones-of-control; then turn-based.
 \item levels m+1..n are \textbf{space station} levels, with death=game over. Emphasis is on combat with alien weapons and/or computer cyberattacks. Interface is tile-based, enhanced (or 2.5D?) graphical.
 \end{enumerate}
-\end{subsection}
 
-\begin{subsection}{Non-Functional}
+\section{Non-Functional}
 %enter non-functional requirements here
 A non-functional requirement place constraints on how the system will act upon the functional requirements.\\
 \begin{enumerate}
@@ -34,8 +33,6 @@ A non-functional requirement place constraints on how the system will act upon t
 \item System views each player as a thread, thread sends/receives messages to a \textbf{controller} thread that manipulates game state.
 \item Peer-to-peer connection to a \textbf{server} thread allows remote player interact with app. via a proxy thread
 \end{enumerate}
-\end{subsection}
 
-\end{chapter}
 \end{document}
 
