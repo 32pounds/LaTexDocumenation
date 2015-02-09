@@ -1,0 +1,41 @@
+\documentclass[12pt]{report}
+\usepackage{titling}
+\usepackage{geometry}
+
+\geometry{margin=1in}
+\begin{document}
+\title{Initial Requirements\\ \vspace{2 mm} {\large CS 383: Software Engineering}}
+
+\author{32 Pounds}
+\date{\today}
+\maketitle
+\clearpage
+
+\begin{chapter}{Initial Requirements}
+\begin{subsection}{Functional}
+%enter functional requirements here
+A functional requirement describes what a software system should do.\\
+
+\begin{enumerate}
+\item Plays as standalone or multiplayer, scaling up to 27 players
+\item on startup: system asks if you want (a) new game, (b) load game, (c) join game. If (a) or (b), system reports domainname/IP to you to give out, if you wish, to other players to join you.
+\item Setting: the game starts at the Spaceport America, a 28 square mile complex located in the Jornada del Muerto region in New Mexico, the center of modern commercial space travel. See its Map. Your levels may start with approximations of the major buildings, starting with the more office/administrative buildings and working towards the space operations buildings.
+\item levels 1..k are relatively ordinary \textbf {office} training levels. There is no death in the initial levels; the emphasis is on social standing, promotion, bureaucracy, verbal jousting, maybe the occasional photobomb, copy machine prank, toner theft, etc. See the Wikipedia article on verbal self defense. NPC friends that you make here, if you gain enough faction with them, will follow and aid you semi-autonomously. Interface is text/ASCII-art, roguelike.
+\item levels k+1..m are \textbf{cyber} levels, with death=dumped out of cyberspace. Tron-like. Emphasis is on knowledge discovery, resouce acquisition, virus combat. Interface is tile-based, 2D graphical, nethacklike. Real-time until you hit \textbf{engagements} by entering enemy zones-of-control; then turn-based.
+\item levels m+1..n are \textbf{space station} levels, with death=game over. Emphasis is on combat with alien weapons and/or computer cyberattacks. Interface is tile-based, enhanced (or 2.5D?) graphical.
+\end{enumerate}
+\end{subsection}
+
+\begin{subsection}{Non-Functional}
+%enter non-functional requirements here
+A non-functional requirement place constraints on how the system will act upon the functional requirements.\\
+\begin{enumerate}
+\item Starts up listening at port 4500 (default) or configurable port.
+\item System views each player as a thread, thread sends/receives messages to a \textbf{controller} thread that manipulates game state.
+\item Peer-to-peer connection to a \textbf{server} thread allows remote player interact with app. via a proxy thread
+\end{enumerate}
+\end{subsection}
+
+\end{chapter}
+\end{document}
+
