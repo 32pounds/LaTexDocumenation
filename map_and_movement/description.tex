@@ -1,0 +1,23 @@
+\documentclass{report}
+
+\begin{document}
+
+\chapter{Map and Movement}
+\textbf{Brett Menzies, Gabriel Giovanini de Souze}
+
+\textbf{diagram:}
+
+\textbf{Description:}
+The map subsystem revolves around the ``Map'' class,
+ which is composed of a ``Layout'' and a ``Tileset'',
+ and aggregates sets of ``Item Position'' and ``Player Position'' classes.
+ A ``Renderer'' class requires an instance of a ``Map'';
+ Its other connections are outside the scope of this diagram.
+ A ``Tileset'' aggregates ``Tiles'' (fixed size map tiles) and 
+ ``Sprites'' (Other images drawn on a map, like items and characters) for use by the map and rendering code.
+ Each ``Item position'' object represents the position and sprite id of items that have been dropped on the map.
+ ``Character position'' acts similarly, except it can be modified by ``input'', which represents 
+ networked, npc, and local player inputs for the purposes of this diagram.
+
+
+\end{document}
