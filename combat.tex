@@ -1,0 +1,45 @@
+\documentclass{report}
+
+\author{32pounds}
+
+\begin{document}
+    \title{Homework 3 LaTeX Documentation}
+    \maketitle
+    \clearpage
+    \chapter{Combat}
+    Summary: When any player or NPC is fighting one another.\\
+    
+    Steps:
+    \begin{enumerate}
+        \item Intiation or Agro.
+        \item Cool down on current attack begins.
+        \item Damage is taken and delt, totals for these values are deducted from health.
+        \item If either player or NPC has zero health the combat ends.
+    \end{enumerate}
+    
+    \section{Intiation and Agro}
+    Summary: Player strikes other party to begin combat or agro, when the player becomes too close to an agressive NPC.\\
+    Preconditions: Two parties are within striking distance of each other. % Look into map/movement for intiation.
+    
+    \section{Cooldown}
+    Summary: The minimum amount of time a player must wait after using an weapon/ability again. The duration of cooldown is based off of the weapon/ability used..\\ % See weapon swapping
+    Preconditions: Player has used an weapon/ability.\\
+    
+    \begin{enumerate}
+        \item Cooldown starts.
+        \item Cooldown ends after preset amount of time.
+    \end{enumerate}
+    Alternative: Player swapped weapon/ability while cooldown was active, thus reseting cooldown. \textit{See weapon swapping.}
+
+    \section{Damage}
+Summary: The amount of hitpoints to decrement from the player or NPC's health. This varies between weapons and abilities.\\
+Preconditions: Stike must have landed on target.
+Alternative: The attack does not hit the intended target and instead misses.\textit{See Missing.}
+    \section{Missing}
+    Summary: When a player launches an attack and the attack doesn't land on the target.\\
+    
+    Preconditions: The player must have intiated an attack or as been attacked through agro.\\
+    Alternative: The attack lands on intended target. \textit{See Damage}
+
+
+\end{document}
