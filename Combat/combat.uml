@@ -13,9 +13,12 @@ Combat o-- "Initiation/Agro"
 Damage o-- Miss
 Damage o-- Hit
 Cooldown<|-- "Weapon Use"
- 
+
+note left: Authors, Jordan Lynn & Derek Snyder
+
  hide members 
  show Player methods
  show Player fields
+
 
  @enduml
