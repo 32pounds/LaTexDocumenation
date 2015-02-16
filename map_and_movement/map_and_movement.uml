@@ -1,0 +1,12 @@
+@startuml
+
+Tile --o TileSet 
+Sprites --o TileSet
+TileSet --* Map
+Input -- CharPosition: Modifies
+CharPosition --o Map
+Layout --* Map
+Items --o Map
+Map --* Renderer
+
+@enduml
