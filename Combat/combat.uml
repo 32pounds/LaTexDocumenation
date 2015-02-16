@@ -1,0 +1,21 @@
+@startuml
+
+class Player{
+    Player Class,
+    attack()
+    die()
+}
+Player<|--Combat
+Combat <|-- Damage
+Combat <|-- Cooldown
+Combat o-- "Initiation/Agro"
+"Initiation/Agro" <|-- "Map Movement"
+Damage o-- Miss
+Damage o-- Hit
+Cooldown<|-- "Weapon Use"
+ 
+ hide members 
+ show Player methods
+ show Player fields
+
+ @enduml
