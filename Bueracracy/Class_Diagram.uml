@@ -1,0 +1,18 @@
+@startuml
+
+title Bueracracy - Positive and Negaive Attention
+hide circles
+hide members
+
+Class Entity{
+}
+Entity <|-- PC
+Entity <|-- NPC
+PC --  Quest_Log : "Holds In Inventory"
+Quest_Log *-- "*" Quest
+Quest *-- "*" Quest_Piece
+NPC_Interaction -- Quest_Piece : "Is a requirement for"
+Dialog <|-- NPC_Interaction
+Item_Exchange <|-- NPC_Interaction
+
+@enduml
