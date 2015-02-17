@@ -1,29 +1,54 @@
 @startuml
+hide circle
 
-class Player{
-    Player Class,
-    attack()
-    die()
+class Entity{
+location
+avatar
+state
+health
+attributes
+standing
+condition
+move()
+attack()
 }
-Player<|--Combat
-Combat <|-- Damage
-Combat <|-- Cooldown
-Combat o-- "Initiation/Agro"
-"Initiation/Agro" <|-- "Map Movement"
-Damage o-- Miss
-Damage o-- Hit
-Cooldown<|-- "Weapon Use"
-
-
-
-
- hide members 
- show Player methods
- show Player fields
 
 note left
-Authors 
-Jordan Lynn & Derek Snyder
+Authors:
+Jordan Lynn
+Derek Snyder
+
+Reviewed by:
+Elizabeth Hernandez
 end note
 
- @enduml
+class PC{
+weapon
+ammunition
+coolDown
+useWeapon()
+die()
+}
+Class MoB{
+homeLocation
+attacks
+agroRange
+wander()
+agro()
+}
+Class Combat {
+participants
+evaluatAmmo()
+evaluateRange()
+evaluateState()
+evaluateArmor()
+adjustState()
+adjustHealth()
+}
+
+Entity<|--PC
+Entity<|--MoB
+PC--Combat
+MoB--Combat
+
+@enduml
