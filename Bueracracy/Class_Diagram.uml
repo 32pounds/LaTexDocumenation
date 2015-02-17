@@ -67,7 +67,7 @@ updateQuest()
 Entity <|-- PC
 Entity <|-- NPC
 PC -- QuestLog
-QuestLog o-- "1..*" Quest
+QuestLog o-- "0..*" Quest
 Quest o-- "1..*" Stage
 NPC -- Stage
 PC -right- Dialog
