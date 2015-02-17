@@ -2,11 +2,11 @@
 title Bueracracy - Positive and Negaive Attention
 hide circles
 note left of Entity
-	Authors
+	Authors:
 	Maddie Brennan
 	Elizabeth Hernandez
 
-	Reviewed by
+	Reviewed by:
 	
 end note
 Class Entity{
