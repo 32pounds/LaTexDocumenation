@@ -1,5 +1,5 @@
 @startuml
-title Bueracracy - Positive and Negaive Attention
+title Bureaucracy - Positive and Negaive Attention
 hide circles
 note left of Entity
 	Authors:
