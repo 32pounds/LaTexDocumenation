@@ -1,18 +1,76 @@
 @startuml
-
 title Bueracracy - Positive and Negaive Attention
 hide circles
-hide members
+note left of Entity
+	Authors
+	Maddie Brennan
+	Elizabeth Hernandez
 
+	Reviewed by
+	
+end note
 Class Entity{
+location
+avatar
+state
+health
+attributes
+standing
+condition
+move()
+attack()
+}
+Class PC {
+questLog
+initiateDialog()
+viewQuestLog()
+}
+Class NPC {
+homeLocation
+greetingText
+stages
+idle()
+agro()
+return()
+queryLog()
+initiateStage()
+}
+Class Dialog{
+participants
+prerequisites
+failureText
+displayText()
+adjustStanding()
+adjustCondition()
+}
+Class QuestLog{
+completedQuests
+activeQuests
+viewQuest()
+}
+Class Quest{
+state
+requiredStanding
+logText
+stages
+updateLog()
+}
+Class Stage{
+state
+reward
+text
+holdingNPC
+adjustStanding()
+exchangeItem()
+updateQuest()
 }
 Entity <|-- PC
 Entity <|-- NPC
-PC --  Quest_Log : "Holds In Inventory"
-Quest_Log *-- "*" Quest
-Quest *-- "*" Quest_Piece
-NPC_Interaction -- Quest_Piece : "Is a requirement for"
-Dialog <|-- NPC_Interaction
-Item_Exchange <|-- NPC_Interaction
+PC -- QuestLog
+QuestLog o-- "1..*" Quest
+Quest o-- "1..*" Stage
+NPC -- Stage
+PC -right- Dialog
+NPC -left- Dialog
 
 @enduml
