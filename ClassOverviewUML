@@ -1,0 +1,36 @@
+@startuml
+title Class Diagram - Overview
+hide circles
+hide members
+
+Game -- Area
+note left of Area
+	Author
+	Elizabeth Hernandez
+
+	Reviewed by
+	
+end note
+Area -- TileSet
+TileSet o-- "1..*" Tile
+Area -- Entities
+Entities o-- "0..*" NPC
+Entities o-- "0..*" MoB
+Entities o-- "1..28" PC
+PC -- "1" Inventory : Owns
+Inventory o-- "1..*" Item
+PC -- "1" QuestLog : Owns
+QuestLog o-- "0..*" Quest
+Quest o-- "1..*" Stage
+
+PC -- Combat
+MoB -- Combat
+Combat -- Item : Produces
+
+PC -- Dialogue
+NPC -- Dialogue
+Dialogue -- Quest : Progresses
+
+Stage -- Item : Produces
+
+@enduml
