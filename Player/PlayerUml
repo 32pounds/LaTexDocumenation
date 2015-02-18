@@ -1,0 +1,22 @@
+@startuml
+hide circles
+
+Game o-- "1 " Collection
+note left
+Authors:
+
+Reviewed by:
+
+end note
+Collection o--"1..28 " Player
+Player o-- "*" Health
+Player -- Mission : Is assigned
+Player o-- "*" Experience
+Player o-- "*" Reputation
+Player o-- "1" Collection01 : Owns
+Collection01 o-- "1" Inventory
+Inventory o-- "*" Weapons
+Inventory o-- "*" Quest
+Inventory o-- "*" Armor
+Inventory o-- "*" Potions
+@enduml
