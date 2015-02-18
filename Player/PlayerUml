@@ -8,8 +8,9 @@ Game o-- "1..28 " PC
 note left
 Authors:
 
-Reviewed by:
 
+Reviewed by:
+Elizabeth Hernandez
 end note
 Class PC{
 health
