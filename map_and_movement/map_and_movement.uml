@@ -1,6 +1,13 @@
 @startuml
+hide circles
 
 Tile --o TileSet 
+note left
+Authors:
+
+Reviewed by:
+
+end note
 Sprites --o TileSet
 TileSet --* Map
 Input -- CharPosition: Modifies
