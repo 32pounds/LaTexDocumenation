@@ -1,19 +1,39 @@
 @startuml
+title Map and Movement
 hide circles
+hide members
+show Object members
+show Entity members
 
-Tile --o TileSet 
+Renderer -- Area : References
 note left
 Authors:
 
 Reviewed by:
-
+Elizabeth Hernandez
 end note
-Sprites --o TileSet
-TileSet --* Map
-Input -- CharPosition: Modifies
-CharPosition --o Map
-Layout --* Map
-Items --o Map
-Map --* Renderer
+Class Sprite{
+location
+}
+Class Object{
+image
+}
+Class Entity{
+avatar
+move()
+}
+Class PC{
+viewMap()
+}
+Area *-- "1" TileSet
+TileSet o-- "0..*" Tile
+Area *-- "0..*" Sprites
+Area *-- "1" Map
+Sprite <|-- Entity
+Entity <|-- PC
+Sprite <|-- Object
+Object <|-- Item
+Object <|-- Door
+Object <|-- Machine
 
 @enduml
