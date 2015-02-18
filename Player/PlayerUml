@@ -1,22 +1,40 @@
 @startuml
+title Player Character
 hide circles
+hide members
+show PC members
 
-Game o-- "1 " Collection
+Game o-- "1..28 " PC
 note left
 Authors:
 
 Reviewed by:
 
 end note
-Collection o--"1..28 " Player
-Player o-- "*" Health
-Player -- Mission : Is assigned
-Player o-- "*" Experience
-Player o-- "*" Reputation
-Player o-- "1" Collection01 : Owns
-Collection01 o-- "1" Inventory
-Inventory o-- "*" Weapons
-Inventory o-- "*" Quest
-Inventory o-- "*" Armor
-Inventory o-- "*" Potions
+Class PC{
+health
+experience
+standings
+attributes
+armor
+weapon
+coolDown
+ammunition
+viewInventory()
+viewQuestLog()
+initiateDialog()
+useWeapon()
+equipItem()
+useItem()
+levelUp()
+interactWithObject()
+die()
+}
+
+PC o-- "1" Inventory
+Inventory o-- "0..*" Item
+Item <|-- Weapon
+Item <|-- Armor
+Item <|-- StaticItem
+Item <|-- Consumable
 @enduml
