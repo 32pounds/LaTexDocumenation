@@ -18,37 +18,37 @@ Summary: When any player or NPC is fighting one another.\\
     
     Steps:
     \begin{enumerate}
-        \item Intiation or Agro.
+        \item Initiation or Aggro.
         \item Cool down on current attack begins.
-        \item Damage is taken and delt, totals for these values are deducted from health.
+        \item Damage is taken and dealt, totals for these values are deducted from health.
         \item If either player or NPC has zero health the combat ends.
     \end{enumerate}
     
-    \section{Intiation and Agro}
-    Summary: Player strikes other party to begin combat or agro, when the player becomes too close to an agressive NPC.\\
+    \section{Initiation and Aggro}
+    Summary: Player strikes other party to begin combat or aggro, when the player becomes too close to an aggressive NPC.\\
     Preconditions: Two parties are within striking distance of each other. % Look into map/movement for intiation.
     
-    \section{Cooldown}
-    Summary: The minimum amount of time a player must wait after using an weapon/ability again. The duration of cooldown is based off of the weapon/ability used..\\ % See weapon swapping
+    \section{Cool-down}
+    Summary: The minimum amount of time a player must wait after using an weapon/ability again. The duration of cool-down is based off of the weapon/ability used..\\ % See weapon swapping
     Preconditions: Player has used an weapon/ability.\\
     
     \begin{enumerate}
-        \item Cooldown starts.
-        \item Cooldown ends after preset amount of time.
+        \item Cool-down starts.
+        \item Cool-down ends after preset amount of time.
     \end{enumerate}
-    Alternative: Player swapped weapon/ability while cooldown was active, thus reseting cooldown. \textit{See weapon swapping.}
+    Alternative: Player swapped weapon/ability while cool-down was active, thus resetting cool-down. \textit{See weapon swapping.}
 
     \section{Damage}
-    Summary: The amount of hitpoints to decrement from the player or NPC's health. This varies between weapons and abilities.\\
+    Summary: The amount of hit points to decrements from the player or NPC's health. This varies between weapons and abilities.\\
     
-    Preconditions: Stike must have landed on target.
+    Preconditions: Strike must have landed on target.
     
     Alternative: The attack does not hit the intended target and instead misses.\textit{See Missing.}
     
     \section{Missing}
     Summary: When a player launches an attack and the attack doesn't land on the target.\\
     
-    Preconditions: The player must have intiated an attack or as been attacked through agro.\\
+    Preconditions: The player must have initiated an attack or as been attacked through aggro.\\
     Alternative: The attack lands on intended target. \textit{See Damage}
 
     \section{Diagram}
@@ -67,7 +67,7 @@ Specialization to each character makes upgrading attributes cheaper/easier for t
 \begin{itemize}
   \item Weapon: Roll of Quarters
   \item Miss percent: Constant with specialization -- High miss percentage with non-specialization weapon
-  \item Cooldown Time: Standard (1 second) -- lowers with level increase % see player use cases
+  \item Cool-down Time: Standard (1 second) -- lowers with level increase % see player use cases
   \item An increase in Power Attribute -- Increase in Strike damage \\
 \end{itemize}
 
@@ -75,7 +75,7 @@ Specialization to each character makes upgrading attributes cheaper/easier for t
 \begin{itemize}
   \item Weapon: Floppy Disc Toss
   \item Miss percent: Low with specialization - High miss percentage with non-specialization weapon
-  \item Cooldown Time: Average (1.5 seconds) -- lowers with level increase
+  \item Cool-down Time: Average (1.5 seconds) -- lowers with level increase
   \item An increase in Focus Attribute -- Increase in disc toss accuracy (miss percent lowers)\\
 \end{itemize}
 
@@ -83,7 +83,7 @@ Specialization to each character makes upgrading attributes cheaper/easier for t
 \begin{itemize}
   \item Weapon: Wand Pen (Spells)
   \item Miss percent: Constant with specialization - High miss percentage with non-specialization weapon
-  \item Cooldown Time: High (2 seconds) -- lowers with level increase
+  \item Cool-down Time: High (2 seconds) -- lowers with level increase
   \item An increase in Synergy Attribute -- Increase in spell duration\\
 \end{itemize}
 
@@ -91,8 +91,8 @@ Specialization to each character makes upgrading attributes cheaper/easier for t
 \begin{itemize}
   \item Weapon: Stapler
   \item Miss percent: Constant with specialization - high miss percentage with non-specialization 
-  \item Cooldown Time: Low (.5 seconds) -- lowers with level increase
-  \item An increase in Speed attribute -- decrease in cooldown time
+  \item Cool-down Time: Low (.5 seconds) -- lowers with level increase
+  \item An increase in Speed attribute -- decrease in cool-down time
 \end{itemize}
 
 
@@ -104,7 +104,7 @@ Specialization to each character makes upgrading attributes cheaper/easier for t
 
 \textbf{Description:}
 
-Bueracracy deals with interactions between entities in the game, with the biggest interaction within this catagory being quests. The diagram above visually shows the classes that are related to receiving and completing quests. This relates to bueracracy because completing quests will help achieve higher approval ratings with the faction that hosts the quest.
+Bureaucracy deals with interactions between entities in the game, with the biggest interaction within this category being quests. The diagram above visually shows the classes that are related to receiving and completing quests. This relates to bureaucracy because completing quests will help achieve higher approval ratings with the faction that hosts the quest.
 
 The root class is titled "Entity" and defines basic features of all characters in the game.
 The classes "NPC" and "PC", which stand for "non-player character" and "player character" respectively, are extensions of the Entity class. 
@@ -122,11 +122,11 @@ A PC must engage in Dialog with an NPC in order to gain and advance through Stag
 \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{map_and_movement.png}\\
 \textbf{Description:}
 The map subsystem revolves around the\`{ }Map'' class,
-which is composed of a\`{ }Layout'' and a\`{ }Tileset'',
+which is composed of a\`{ }Layout'' and a\`{ }Tile set'',
  and aggregates sets of ``Item Position'' and ``Player Position'' classes.
  A\`{ }Renderer'' class requires an instance of a\`{ }Map'';
   Its other connections are outside the scope of this diagram.
-  A\`{ }Tileset'' aggregates ``Tiles'' (fixed size map tiles) and 
+  A\`{ }Tile set'' aggregates ``Tiles'' (fixed size map tiles) and 
    ``Sprites'' (Other images drawn on a map, like items and characters) for use by the map and rendering code.
     Each ``Item position'' object represents the position and sprite id of items that have been dropped on the map.
     ``Character position'' acts similarly, except it can be modified by\`{ }input'', which represents 
