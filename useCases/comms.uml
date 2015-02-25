@@ -1,0 +1,16 @@
+@startuml
+actor Client <<Player>>
+actor Server
+
+left to right direction
+
+Server - (Setup game)
+Server -- (Hosted game)
+Server <|-- Client
+Client - (Hosted game) : Connects to
+Client -- (packets)
+Server -- (game state)
+
+(packets)->Server :Recieves
+
+@enduml
