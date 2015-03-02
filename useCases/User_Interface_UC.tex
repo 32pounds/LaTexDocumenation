@@ -1,0 +1,121 @@
+\documentclass{report}
+
+\begin{document}
+\chapter{User Interface Use Cases}
+\textbf{Madeleine Brennan  - \textit{bren9231@vandals.uidaho.edu} }
+
+\section{Description}
+
+The following use cases describe actions that are related to the user interacting with the user interface. User interface in this context is defined as the GUI and the human players interactions in it.
+\end{section}
+
+\section{Use Cases}
+\subsection{Load Save Game}
+
+\textbf{Actors}:
+Player
+
+\textbf{Preconditions}:
+Previously saved game exists.
+
+\textbf{summary}:
+The player selects the "Load Game" choice on the main menu, for which the system GUI has them select the previously saved game, and loads the game state to the previously saved state.
+
+\textbf{Related Use Cases}:
+
+\textbf{Steps}:
+\begin{enumerate}
+\item Player opens new instance of game
+\item GUI loads to main menu
+\item Player selects "Load Game" option
+\item Menu pops up that displays previous saved games
+\item Player selects which saved game to load
+\item System loads game state to that saved in the saved game
+\end{enumerate}
+
+\textbf{Alternative}:
+If no previous games have been saved, rather than the game select menu appearing an error message will appear displaying the message that there has been no saved games, and to select the new game option.
+\end{subsection}
+
+\subsection{Load New Map}
+
+\textbf{Actors}:
+Player
+
+\textbf{Preconditions}:
+Player has moved onto exit space of current map
+
+\textbf{Steps}:
+\begin{enumerate}
+\item System opens box asking player whether or not they want to move to the next map
+\item Player selects that they would like to move to the next map by selecting 'yes'.
+\item System displays waiting screen
+\item System locates file location of the new map
+\item System prints new map to the screen
+\item Player sprite, as well as any item/monster/other player sprites appear on the map as appropriate
+\end{enumerate}
+\end{subsection}
+
+\subsection{Open Inventory}
+
+\textbf{Actors}
+Player
+
+\textbf{Preconditions}:
+None
+
+\textbf{Steps}
+\begin{enumerate}
+\item Player selects the inventory icon on the screen
+\item System opens the inventory member of the player class
+\item GUI is updated to display an empty inventroy with X number of spots
+\item System reads the items stored in player class inventory member and prints text/item sprites to screen
+\end{enumerate}
+
+\textbf{Alternatives}
+If the players inventory is empty, step four will be skipped
+\end{subsection}
+
+\subsection{Load Equp Menu}
+
+\textbf{Actors}
+Player
+
+\textbf{Preconditions}
+Inventory Menu is open
+
+\textbf{Related Use Cases}
+Open Inventory, Open Quest Log
+
+\textbf{Steps}
+\begin{enumerate}
+\item While in inventory menu, player selects "equip" button
+\item System opens new menu showing slots for places for items to be equipped
+\item System loads items in player's inventory that are able to be equipped to sidebar
+\item System moves items currently equipped to player to specific slot.
+\end{enumerate}
+\end{subsection}
+
+\subsection{Open Quest Log}
+
+\textbf{Actors}
+Player
+
+\textbf{Preconditions}
+Inventory Menu is open
+
+\textbf{Related Use Cases}
+Open Inventory, Load Equip Menu
+
+\textbf{Steps}
+\begin{enumerate}
+\item While in inventory menu, player selects "Quest Log" button
+\item System opens new menu
+\item System loads player's quest log member variable
+\item System loads quests from quest log member variable and prints them to the menu
+\end{enumerate}
+\end{subsection}
+
+\end{section}
+
+\end{chapter}
