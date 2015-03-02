@@ -1,0 +1,70 @@
+@startuml
+Interface InputProcessor{
+	From libGDX
+	bool keyDown(int)
+	bool touchDown(...)
+}
+Interface Drawable{
+	From the 
+	rendering system
+	void draw(Batch)
+}
+Package Comms{
+}
+
+class UIElement{
+	rect getSize()
+	bool onClick()
+}
+class InputHandler{
+	bool keyDown(int)
+	bool touchDown(...)
+}
+class CmdHandler{
+	void equip(...)
+	void move(...)
+	void attack(...)
+	void converse(...)
+}
+class UIStack{
+	void draw(Batch)
+	void addElement(...)
+}
+
+UIElement -left-|> Drawable
+UIStack -down-|> Drawable
+UIStack o-- "*" UIElement
+InputHandler -left-> UIStack : "mouse click locations"
+InputHandler -down-|> InputProcessor
+InputHandler -up-> CmdHandler : "keyboard commands"
+UIElement --> CmdHandler : "onClick actions"
+CmdHandler -up-> Comms : "Issues valid cmds"
+
+note bottom of UIElement
+	The UI will be composed
+	of specific classes 
+	extending UIElement
+end note
+
+note as N1
+	The InputHandler distributes
+	input events between the 
+	UIStack and the command handler
+	
+	The UIStack distributes 
+	clicks and controls of the
+	Batch rendering object to the 
+	UIElements it aggregates
+	
+	UIElements may issue commands
+	to the CmdHandler when clicked
+	
+	the command handler takes 
+	abstract commands, checks if 
+	they are valid and then instructs
+	the comms system what user 
+	commands to transmit to the server
+end note
+
+@enduml
+
