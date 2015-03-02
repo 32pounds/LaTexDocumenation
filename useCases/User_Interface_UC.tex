@@ -2,27 +2,24 @@
 
 \begin{document}
 \chapter{User Interface Use Cases}
-\textbf{Madeleine Brennan  - \textit{bren9231@vandals.uidaho.edu} }
+\textbf{Madeleine Brennan  - \textit{bren9231@vandals.uidaho.edu} } \\
+\textbf{Brett Menzies - \textit{menz9375@vandals.uidaho.edu} }
 
 \section{Description}
 
 The following use cases describe actions that are related to the user interacting with the user interface. User interface in this context is defined as the GUI and the human players interactions in it.
-\end{section}
+
 
 \section{Use Cases}
 \subsection{Load Save Game}
 
 \textbf{Actors}:
-Player
-
+Player \\
 \textbf{Preconditions}:
-Previously saved game exists.
-
+Previously saved game exists. \\
 \textbf{summary}:
-The player selects the "Load Game" choice on the main menu, for which the system GUI has them select the previously saved game, and loads the game state to the previously saved state.
-
-\textbf{Related Use Cases}:
-
+The player selects the "Load Game" choice on the main menu, for which the system GUI has them select the previously saved game, and loads the game state to the previously saved state. \\
+\textbf{Related Use Cases}:\\
 \textbf{Steps}:
 \begin{enumerate}
 \item Player opens new instance of game
@@ -32,19 +29,15 @@ The player selects the "Load Game" choice on the main menu, for which the system
 \item Player selects which saved game to load
 \item System loads game state to that saved in the saved game
 \end{enumerate}
-
 \textbf{Alternative}:
-If no previous games have been saved, rather than the game select menu appearing an error message will appear displaying the message that there has been no saved games, and to select the new game option.
-\end{subsection}
+If no previous games have been saved, rather than the game select menu appearing an error message will appear displaying the message that there has been no saved games, and to select the new game option.\\
 
 \subsection{Load New Map}
 
 \textbf{Actors}:
-Player
-
+Player \\
 \textbf{Preconditions}:
-Player has moved onto exit space of current map
-
+Player has moved onto exit space of current map \\
 \textbf{Steps}:
 \begin{enumerate}
 \item System opens box asking player whether or not they want to move to the next map
@@ -54,39 +47,32 @@ Player has moved onto exit space of current map
 \item System prints new map to the screen
 \item Player sprite, as well as any item/monster/other player sprites appear on the map as appropriate
 \end{enumerate}
-\end{subsection}
+
 
 \subsection{Open Inventory}
 
 \textbf{Actors}
-Player
-
+Player \\
 \textbf{Preconditions}:
-None
-
+None \\
 \textbf{Steps}
 \begin{enumerate}
 \item Player selects the inventory icon on the screen
 \item System opens the inventory member of the player class
-\item GUI is updated to display an empty inventroy with X number of spots
+\item GUI is updated to display an empty inventory with X number of spots
 \item System reads the items stored in player class inventory member and prints text/item sprites to screen
 \end{enumerate}
-
 \textbf{Alternatives}
-If the players inventory is empty, step four will be skipped
-\end{subsection}
+If the players inventory is empty, step four will be skipped \\
 
-\subsection{Load Equp Menu}
+\subsection{Load Equip Menu}
 
 \textbf{Actors}
-Player
-
+Player \\
 \textbf{Preconditions}
-Inventory Menu is open
-
+Inventory Menu is open \\
 \textbf{Related Use Cases}
-Open Inventory, Open Quest Log
-
+Open Inventory, Open Quest Log \\
 \textbf{Steps}
 \begin{enumerate}
 \item While in inventory menu, player selects "equip" button
@@ -94,19 +80,16 @@ Open Inventory, Open Quest Log
 \item System loads items in player's inventory that are able to be equipped to sidebar
 \item System moves items currently equipped to player to specific slot.
 \end{enumerate}
-\end{subsection}
+
 
 \subsection{Open Quest Log}
 
 \textbf{Actors}
-Player
-
+Player \\
 \textbf{Preconditions}
-Inventory Menu is open
-
+Inventory Menu is open \\
 \textbf{Related Use Cases}
-Open Inventory, Load Equip Menu
-
+Open Inventory, Load Equip Menu \\
 \textbf{Steps}
 \begin{enumerate}
 \item While in inventory menu, player selects "Quest Log" button
@@ -114,8 +97,62 @@ Open Inventory, Load Equip Menu
 \item System loads player's quest log member variable
 \item System loads quests from quest log member variable and prints them to the menu
 \end{enumerate}
-\end{subsection}
 
-\end{section}
+\subsection{Use ability (Attack)}
 
-\end{chapter}
+\textbf{Actors} Player \\
+\textbf{Preconditions} Player has unlocked abilities \\
+\textbf{Summary} The Player uses his/her skill to use an item on a target \\
+\textbf{Terminates} After the ability has been activated \\
+\textbf{Steps}
+\begin{enumerate}
+	\item Player clicks an ability in the ability bar
+	\item If the ability needs a target, the cursor changes to reflect this, and the user clicks a target
+	\item the system locks the ability for its individual cooldown time
+\end{enumerate}
+\textbf{Alternatives}
+If the ability is currently cooling off the click will be ignored \\
+
+\subsection{Equip an Item}
+\textbf{Actors} Player \\
+\textbf{Preconditions} Play has an equitable item, and the necessary skill to use the item \\
+\textbf{Summary} The Player equips an item, changing their stats appropriately \\
+\textbf{Terminates} When item is equipped or returned to inventory \\
+\textbf{Related use cases} Load Equip Menu \\
+\textbf{Steps}
+
+\begin{enumerate}
+	\item The user Selects an Inventory item
+	\item The user clicks on an equipment slot on their equipment display.
+	\item The system checks if the active item is equitable in that location and the user has the necessary skill.
+	\begin{itemize}
+		\item If valid: system equips the active item to character and recalculates player stats,
+		transporting previously equipped items to inventory if necessary.
+		\item If invalid: system prints message in dialog box explaining what conditions failed.
+	\end{itemize}
+\end{enumerate}
+\textbf{Alternative:} If the player does not want to equip their selected equipment, The user right-clicks anywhere, deactivating and returning the item to its previous location. \\
+
+
+\subsection{Use an Item}
+\textbf{Actors} Player \\
+\textbf{Preconditions} Player has usable item in inventory, valid target, and necessary skill \\
+\textbf{Summary} The Player uses his/her skill to use an item on a target \\
+\textbf{Terminates} After item is consumed or returned to inventory \\
+\textbf{Related use cases} Select an Item from Inventory \\
+\textbf{Steps}
+\begin{enumerate}
+	\item The user Selects an Item from Inventory
+	\item The user clicks on a target map tile.
+	\item The system checks if the target is valid and the user has the necessary skill to use the active item.
+	\begin{itemize}
+		\item If valid: system applies items effects to target; item is consumed.
+		\item If invalid:  system prints message in dialog box explaining what conditions failed.
+	\end{itemize}
+	\item Alternative: The user right-clicks anywhere, deactivating and returning the item to its previous location.
+\end{enumerate}
+
+
+
+\end{document}
+
