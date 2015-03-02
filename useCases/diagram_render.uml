@@ -1,0 +1,65 @@
+@startuml
+
+interface Drawable {
+    bool expired
+    int zIndex
+    draw(Batch)
+}
+
+class Render {
+    Drawable[] drawables
+    removeExpiredItems()
+    render()
+}
+
+class Monster {
+    int x
+    int y
+    int zIndex
+    bool expired
+    draw(Batch)
+}
+
+class Map {
+    int zIndex
+    bool expired
+    draw(Batch)
+}
+
+class Player {
+    int x
+    int y
+    int zIndex
+    bool expired
+    draw(Batch)
+}
+
+class Items {
+    int x
+    int y
+    int zIndex
+    bool expired
+    draw(Batch)
+}
+
+class SpriteStorage {
+    loadAssets()
+    Sprite getSprite(assetId)
+}
+
+Render *-- Drawable
+
+Drawable <|-- Monster
+Drawable <|-- Map
+Drawable <|-- Player
+Drawable <|-- Items
+
+Monster *-- SpriteStorage
+
+Map *-- SpriteStorage
+
+Items *-- SpriteStorage
+
+Player *-- SpriteStorage
+
+@enduml

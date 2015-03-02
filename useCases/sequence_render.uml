@@ -1,0 +1,26 @@
+@startuml
+
+SpriteStorage <- SpriteStorage : loadAssets()
+
+Map -> SpriteStorage : getSprite(assetId)
+Map <-- SpriteStorage : Sprite
+
+Monster -> SpriteStorage : getSprite(assetId)
+Monster <-- SpriteStorage : Sprite
+
+Player -> SpriteStorage : getSprite(assetId)
+Player <-- SpriteStorage : Sprite
+
+Items -> SpriteStorage : getSprite(assetId)
+Items <-- SpriteStorage : Sprite
+
+Render <- Items : drawables.append(item)
+Render <- Player : drawables.append(player)
+Render <- Monster : drawables.append(monster)
+Render <- Map : drawables.append(map)
+
+Render <- Render : removeExpiredItems()
+Render <- Render : render()
+
+
+@enduml
