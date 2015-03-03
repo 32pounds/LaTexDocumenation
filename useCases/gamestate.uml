@@ -1,0 +1,26 @@
+@startuml
+title Game State
+hide circles
+
+Comm -right- GameState : "sends info to >"
+
+Renderer -left- GameState : "sends info to <"
+
+GameState <-- PlayerInfo : "is stored in"
+
+PlayerInfo : space(x,y)
+
+GameState <-- EnemyInfo : "is stored in"
+
+EnemyInfo : space(x,y)
+EnemyInfo : type[]
+EnemyInfo : respawn[x,y]
+
+GameState <-- ItemInfo : "is stored in"
+
+ItemInfo : space(x,y)
+ItemInfo : available()
+
+GameState <-- MapData : "is stored in"
+
+@enduml
