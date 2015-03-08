@@ -1,0 +1,33 @@
+@startuml
+class Command{
+    {abstract} char[] getData()
+}
+class MoveCmd{
+    -Direction dir
+    MoveCmd(Direction direction)
+    Direction getDirection()
+    char[] getData()
+}
+enum Direction{
+    NORTH
+    EAST 
+    SOUTH
+    WEST
+    char toChar()
+}
+
+MoveCmd *-right- Direction
+MoveCmd -up-|> Command
+
+note bottom of Direction
+    From the map package
+end note
+
+note right of Command
+   abstract class for abstract commands representing the users actions
+   These are intended to be constructed by the input system 
+   then tranported by the comms system before being sent to the
+   main game logic loop to process
+end note
+
+@enduml
