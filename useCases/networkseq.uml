@@ -1,0 +1,9 @@
+@startuml
+actor client
+actor server
+server-> "init game"
+client-> server: request to join
+server-> "init player"
+server -> client: transmit states
+server -> server: Server side logic
+@enduml

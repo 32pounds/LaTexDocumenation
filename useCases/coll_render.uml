@@ -1,0 +1,51 @@
+@startuml
+title: Update Game State (Collaboration Diagram)
+left to right direction
+
+class SpriteStorage {
+  loadAssets()
+ getSprite()
+}
+
+class Monster {
+    int x
+    int y
+    int zIndex
+    bool expired
+    draw(Batch)
+}
+class Map {
+    int zIndex
+    bool expired
+    draw(Batch)
+}
+
+class Player {
+    int x
+    int y
+    int zIndex
+    bool expired
+    draw(Batch)
+}
+
+
+class Render {
+    Drawable[] drawables
+    removeExpiredItems()
+    render()
+}
+Render<-- Render: 5: render()
+Render<-- Render: 4: removeExpiredItems()
+
+SpriteStorage <-- SpriteStorage: 1: loadAssets()
+
+
+SpriteStorage <-- Monster: 2.1.2: getSprite()
+SpriteStorage <-- Player: 2.1.1: getSprite()
+SpriteStorage <-- Map: 2.1.3: getSprite()
+
+Render <-- Monster: 3.1.2: drawables.append(monster)
+Render <-- Player: 3.1.1: drawables.append(player)
+Render <-- Map: 3.1.3: drawables.append(map)
+
+@enduml
