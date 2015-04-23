@@ -1,0 +1,63 @@
+@startuml
+class Parser {
+    Parser(GameState gameState)
+    String Parse(Entity[] entities, Command[] commands)
+    String Parse(Command[] commands)
+    Command[] DeParseCommands(String data)
+    String Parse(Entity[] entities)
+    String Parse(Collection<Entity> entities)
+    Pair<Entity[], Command[]> DeParse(String data)
+    Entity[] DePerseEntities(String data)
+}
+class GameLoop{
+    GameLoop()
+            void handle(String message)
+            void run()
+    void initializeGameState()
+    String getStateMessage()
+    GameID requestNewPlayer()
+    void setRunning(boolean running)
+    void syncWith(GameState remoteState)
+    void run()
+}
+class ServerThread{
+    ServerThread( int port, MessageHandler handler) throws IOException
+    void run()
+    boolean getServerStatus()
+    void setupUDP()
+    void SendPacket( DatagramPacket toSendPacket ) throws InterruptedException
+    void SendString( String dataToSend )
+    void RecievePacket() throws InterruptedException
+    void CloseServer()
+}
+class ClientThread{
+    ClientThread(String address, int myPort,int servPort, MessageHandler handler)
+    void run()
+    void ConnectToServer()
+    void SendString( String dataToSend )
+    void SendPacket( DatagramPacket toSendPacket ) throws InterruptedException
+    void RecieveGameState() throws InterruptedException
+    void CloseConnection()
+}
+abstract class MessageHandler {
+    {abstract} void handle(String received)
+        ProcessRunner(String received)
+        void run()
+    void process(String received)
+}
+class OSGame{
+    void create()
+            void handle(String message)
+    void handleCommand(Command cmd)
+    void syncWithState(String state)
+    void render()
+}
+
+ClientThread  --|> Thread
+ClientThread *-- "1" MessageHandler
+GameLoop *-- "1" ServerThread
+OSGame *-- "1" ClientThread
+ServerThread  --|> Thread
+ServerThread *-- "1" MessageHandler
+
+@enduml

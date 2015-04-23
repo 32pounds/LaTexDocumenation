@@ -1,0 +1,278 @@
+@startuml
+class OSInputProcessor{
+    {static} OSInputProcessor getInstance()
+    void addInputPorcessor(InputProcessor inputProcessor)
+    void removeInputPorcessor(InputProcessor inputProcessor)
+    boolean keyDown(int keycode)
+    boolean keyUp(int keycode)
+    boolean keyTyped(char character)
+    boolean touchDown(int screenX, int screenY, int pointer, int button)
+    boolean touchUp(int screenX, int screenY, int pointer, int button)
+    boolean touchDragged(int screenX, int screenY, int pointer)
+    boolean mouseMoved(int screenX, int screenY)
+    boolean scrolled(int amount)
+}
+class DummyCmd{
+    DummyCmd()
+    void execute(GameState state)
+    char[] getData()
+}
+class MoveCmd{
+    MoveCmd(GameID target, Direction direction)
+    MoveCmd()
+    Direction getDirection()
+    GameID getActorID()
+    void execute(GameState state)
+    char[] getData()
+}
+class StopCmd{
+    StopCmd(GameID target, Direction direction)
+    StopCmd()
+    Direction getDirection()
+    GameID getActorID()
+    void execute(GameState state)
+    char[] getData()
+}
+class InputHandler{
+    InputHandler(GameID target, CommandHandler cH)
+    boolean keyDown(int keycode)
+    boolean keyUp(int keycode)
+    boolean keyTyped(char character)
+    boolean touchDown(int screenX, int screenY, int pointer, int button)
+    boolean touchUp(int screenX, int screenY, int pointer, int button)
+    boolean touchDragged(int screenX, int screenY, int pointer)
+    boolean mouseMoved(int screenX, int screenY)
+    boolean scrolled(int amount)
+}
+interface CommandHandler {
+    void handleCommand(Command cmd)
+}
+abstract class Command {
+    {abstract} void execute(GameState state)
+    char[] packetize()
+    {static} Command parse(char[] input)
+}
+class GameState {
+    GameState(Map map)
+    Entity getByID(GameID id)
+    GameID register(Entity obj)
+    void register(Entity obj, GameID id)
+    void remove(GameID id)
+    Collection<Entity> entities()
+    List<Drawable> drawables()
+    GameID addPlayer(Player player)
+    Collection<Player> getPlayers()
+    Map gameMap()
+}
+class GameID {
+    GameID()
+    GameID(Number inputID)
+    GameID(char inputID)
+    char toChar()
+    boolean equals(Object obj)
+    GameID clone()
+    int hashCode()
+}
+class Parser {
+    Parser(GameState gameState)
+    String Parse(Entity[] entities, Command[] commands)
+    String Parse(Command[] commands)
+    Command[] DeParseCommands(String data)
+    String Parse(Entity[] entities)
+    String Parse(Collection<Entity> entities)
+    Pair<Entity[], Command[]> DeParse(String data)
+    Entity[] DePerseEntities(String data)
+}
+class GameLoop{
+    GameLoop()
+            void handle(String message)
+            void run()
+    void initializeGameState()
+    String getStateMessage()
+    GameID requestNewPlayer()
+    void setRunning(boolean running)
+    void syncWith(GameState remoteState)
+    void run()
+}
+class Position {
+    Position(int x, int y)
+    int getX()
+    int getY()
+    void setX(int x)
+    void setY(int y)
+}
+enum Direction {
+    char toChar() return i }
+    {static} Direction getByChar(char in)
+}
+class Map{
+    {static} int XDIMENSION
+    {static} int YDIMENSION
+    Map()
+    void draw(SpriteBatch batch)
+    int getXBound()
+    int getYBound()
+    int getZIndex()
+    char getCode(int xIndex, int yIndex)
+    char getCode(Position pos)
+    boolean isWalkable(int x, int y)
+    boolean isWalkable(Position pos)
+    boolean isExpired()
+    int isMove(int x, int y)
+    boolean isMove(Position pos)
+    Position findFirstInstance(char item)
+    Position findNextInstance(int X, int Y, char item)
+    Position findPreviousInstance(int X, int Y, char item)
+}
+class PopupMenu{
+    void clicked()
+    void draw(SpriteBatch batch)
+    int getZIndex()
+    boolean isExpired()
+    boolean keyDown(int keycode)
+    boolean keyUp(int keycode)
+    boolean keyTyped(char character)
+    boolean touchDown(int screenX, int screenY, int pointer, int button)
+    boolean touchUp(int screenX, int screenY, int pointer, int button)
+    boolean touchDragged(int screenX, int screenY, int pointer)
+    boolean mouseMoved(int screenX, int screenY)
+    boolean scrolled(int amount)
+}
+class Debugger{
+    Debugger()
+    void draw(SpriteBatch batch)
+    int getZIndex()
+    boolean isExpired()
+    void update()
+}
+class Player{
+    Player(GameState state, String texture)
+    void update()
+    void setMovingDir(Direction direction)
+    void stopMoving(Direction direction)
+}
+class MonsterTowards{
+    MonsterTowards(GameState state, String img, Sound splatSound)
+    void update()
+}
+class Monster{
+    Monster(GameState state, String img, Sound splatSound)
+    boolean isDead()
+    void changeDeath(String img)
+    void update()
+    boolean squished()
+    Player getClosestPlayer()
+}
+class MonsterDistance{
+    MonsterDistance(GameState state, String img, Sound splatSound)
+    void update()
+}
+class Entity{
+    String getSpriteString()
+    GameID getID()
+    void assignID(GameID newID)
+    Entity(GameState state, String img)
+    void changeSprite(String img)
+    void setXPos(int x)
+    void setYPos(int y)
+    int getXPos()
+    int getYPos()
+    void draw(SpriteBatch batch)
+    int getZIndex()
+    boolean isExpired()
+    void setRotation(int rotation)
+    int getRotation()
+    synchronized void move(Direction dir)
+}
+class ServerThread{
+    ServerThread( int port, MessageHandler handler) throws IOException
+    void run()
+    boolean getServerStatus()
+    void setupUDP()
+    void SendPacket( DatagramPacket toSendPacket ) throws InterruptedException
+    void SendString( String dataToSend )
+    void RecievePacket() throws InterruptedException
+    void CloseServer()
+}
+class ClientThread{
+    ClientThread(String address, int myPort,int servPort, MessageHandler handler)
+    void run()
+    void ConnectToServer()
+    void SendString( String dataToSend )
+    void SendPacket( DatagramPacket toSendPacket ) throws InterruptedException
+    void RecieveGameState() throws InterruptedException
+    void CloseConnection()
+}
+abstract class MessageHandler {
+    {abstract} void handle(String received)
+        ProcessRunner(String received)
+        void run()
+    void process(String received)
+}
+class OSGame{
+    void create()
+            void handle(String message)
+    void handleCommand(Command cmd)
+    void syncWithState(String state)
+    void render()
+}
+interface Updatable {
+}
+class SpriteStorage {
+    {static} SpriteStorage getInstance()
+    Texture getTexture(String code)
+    void loadAssets()
+}
+abstract class Drawable{
+    {abstract} void draw(SpriteBatch batch)
+    {abstract} int getZIndex()
+    {abstract} boolean isExpired()
+    int compareTo(Drawable o)
+}
+
+ClientThread  --|> Thread
+ClientThread *-- "1" MessageHandler
+Debugger --|> Drawable
+Debugger --|> Updatable
+Drawable --|> Comparable
+DummyCmd  --|> Command
+Entity  --|> Drawable
+Entity o-- "1" GameID
+Entity *-- "1" Position
+GameLoop  --|> Thread
+GameLoop *-- "0..*" Command
+GameLoop *-- "1" ServerThread
+GameLoop o-- "0..*" Updatable
+GameLoop o-- "1" GameState
+GameState o-- "0..*" Entity
+GameState o-- "1" Map
+InputHandler --|> InputProcessor
+InputHandler "1..*" o-- CommandHandler : "Gives commands to"
+Map  --|> Drawable
+Monster --|> Entity
+Monster --|> Updatable
+MonsterDistance  --|> Monster
+MonsterTowards  --|> Monster
+MoveCmd  --|> Command
+MoveCmd o-- "1" Direction
+MoveCmd o-- "1" GameID : "target player"
+OSGame *-- "1" ClientThread
+OSGame --|> ApplicationAdapter
+OSGame --|> CommandHandler
+OSGame o-- "1" Debugger
+OSGame o-- "1" GameID : "local player"
+OSGame o-- "1" GameState
+OSInputProcessor --|> InputProcessor
+OSInputProcessor o-- "1..@" InputProcessor
+Player --|> Entity
+Player --|> Updatable
+PopupMenu --|> Drawable
+PopupMenu --|> InputProcessor
+ServerThread  --|> Thread
+ServerThread *-- "1" MessageHandler
+SpriteStorage *-- "1..*" Texture
+StopCmd  --|> Command
+StopCmd o-- "1" Direction
+StopCmd o-- "1" GameID : "target player"
+
+@enduml

@@ -1,0 +1,108 @@
+@startuml
+class GameState {
+    GameState(Map map)
+    Entity getByID(GameID id)
+    GameID register(Entity obj)
+    void register(Entity obj, GameID id)
+    void remove(GameID id)
+    Collection<Entity> entities()
+    List<Drawable> drawables()
+    GameID addPlayer(Player player)
+    Collection<Player> getPlayers()
+    Map gameMap()
+}
+class GameID {
+    GameID()
+    GameID(Number inputID)
+    GameID(char inputID)
+    char toChar()
+    boolean equals(Object obj)
+    GameID clone()
+    int hashCode()
+}
+class Position {
+    Position(int x, int y)
+    int getX()
+    int getY()
+    void setX(int x)
+    void setY(int y)
+}
+class Map{
+    {static} int XDIMENSION
+    {static} int YDIMENSION
+    Map()
+    void draw(SpriteBatch batch)
+    int getXBound()
+    int getYBound()
+    int getZIndex()
+    char getCode(int xIndex, int yIndex)
+    char getCode(Position pos)
+    boolean isWalkable(int x, int y)
+    boolean isWalkable(Position pos)
+    boolean isExpired()
+    int isMove(int x, int y)
+    boolean isMove(Position pos)
+    Position findFirstInstance(char item)
+    Position findNextInstance(int X, int Y, char item)
+    Position findPreviousInstance(int X, int Y, char item)
+}
+class Player{
+    Player(GameState state, String texture)
+    void update()
+    void setMovingDir(Direction direction)
+    void stopMoving(Direction direction)
+}
+class Monster{
+    Monster(GameState state, String img, Sound splatSound)
+    boolean isDead()
+    void changeDeath(String img)
+    void update()
+    boolean squished()
+    Player getClosestPlayer()
+}
+class Entity{
+    String getSpriteString()
+    GameID getID()
+    void assignID(GameID newID)
+    Entity(GameState state, String img)
+    void changeSprite(String img)
+    void setXPos(int x)
+    void setYPos(int y)
+    int getXPos()
+    int getYPos()
+    void draw(SpriteBatch batch)
+    int getZIndex()
+    boolean isExpired()
+    void setRotation(int rotation)
+    int getRotation()
+    synchronized void move(Direction dir)
+}
+interface Updatable {
+}
+class GameLoop{
+    GameLoop()
+            void handle(String message)
+            void run()
+    void initializeGameState()
+    String getStateMessage()
+    GameID requestNewPlayer()
+    void setRunning(boolean running)
+    void syncWith(GameState remoteState)
+    void run()
+}
+
+Entity  --|> Drawable
+Entity o-- "1" GameID
+Entity *-- "1" Position
+GameLoop  --|> Thread
+GameLoop o-- "0..*" Updatable
+GameLoop o-- "1" GameState
+GameState o-- "0..*" Entity
+GameState o-- "1" Map
+Map  --|> Drawable
+Monster --|> Entity
+Monster --|> Updatable
+Player --|> Entity
+Player --|> Updatable
+
+@enduml

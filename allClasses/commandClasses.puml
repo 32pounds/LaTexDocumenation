@@ -1,0 +1,50 @@
+@startuml
+class DummyCmd{
+    DummyCmd()
+    void execute(GameState state)
+    char[] getData()
+}
+class MoveCmd{
+    MoveCmd(GameID target, Direction direction)
+    MoveCmd()
+    Direction getDirection()
+    GameID getActorID()
+    void execute(GameState state)
+    char[] getData()
+}
+class StopCmd{
+    StopCmd(GameID target, Direction direction)
+    StopCmd()
+    Direction getDirection()
+    GameID getActorID()
+    void execute(GameState state)
+    char[] getData()
+}
+abstract class Command {
+    {abstract} void execute(GameState state)
+    char[] packetize()
+    {static} Command parse(char[] input)
+}
+class GameID {
+    GameID()
+    GameID(Number inputID)
+    GameID(char inputID)
+    char toChar()
+    boolean equals(Object obj)
+    GameID clone()
+    int hashCode()
+}
+enum Direction {
+    char toChar() return i }
+    {static} Direction getByChar(char in)
+}
+
+DummyCmd  --|> Command
+MoveCmd  --|> Command
+MoveCmd o-- "1" Direction
+MoveCmd o-- "1" GameID : "target player"
+StopCmd  --|> Command
+StopCmd o-- "1" Direction
+StopCmd o-- "1" GameID : "target player"
+
+@enduml
