@@ -1,0 +1,27 @@
+@startuml
+title Server/Client relationship
+
+box "client space"
+     actor Client
+end box
+
+box "server space"
+database Server
+participant GameLoop
+end box
+
+
+== Initialization ==
+Client -> Server: Join Request
+activate Server
+Server --> GameLoop: <<GameLoop.CreateID()>>
+GameLoop --> Server: GameID
+deactivate Server
+Server -> Client: GameID
+
+== Running Game ==
+
+Server <--> Client: Game State & Commands
+
+
+@enduml
