@@ -1,0 +1,182 @@
+\documentclass[12pt]{report}
+\usepackage{titling}
+\usepackage{geometry}
+\usepackage{graphicx}
+
+\geometry{margin=1in}
+\begin{document}
+\title{System Requirements Documentation\\ \vspace{2 mm} {\large CS 383: Software Engineering}}
+\maketitle
+\clearpage
+
+\chapter{Use Cases}
+\textbf{Madeleine Brennan}
+
+This chapter presents the use cases based off the major systems in the game. These categories
+include the player, monster, communications, game state and map.
+
+\section{Map}
+
+\textbf{Update Map}
+Summary: When the player moves, the map updates to show the player on the new position of the map
+
+Actors:
+Renderer, Game State
+
+Preconditions: In order for the map to be updated, the game window must
+be open and the original map render must be completed.
+
+Goal: To update the map after player or monster movement.
+
+Related Use Cases: Draw Map.
+	
+Steps: 
+\begin{enumerate}
+	\item Player or monster changes position on the map.
+	\item Game state checks validity of movement.
+	\item Game state is updated to reflect new position
+	\item Renderer is called to redraw the map.
+	\item Map is redrawn to the screen with updated positions.
+\end{enumerate}
+	
+Alternative: Player/monster movement is determined invalid in step two, map is not updated.
+
+\textbf{Draw Map}
+Summary: The renderer is called and parses through the map text file, prints corresponding PNG images to the game window to create the visual map.
+
+Actors: Renderer
+
+Preconditions: The JSON file containing the tile specifics and the text file with the ASCII map are located in the assets file. Map has been loaded into the array grid.
+
+Goal: Print the map to the game window.
+
+Related Use Cases: Update Map
+
+Steps:
+\begin{enumerate}
+	\item For each character in the grid array it selects the position of the grid
+	\item The character is searched for the corresponding tile texture
+	\item If multiple textures are used for a certain tile(i.e. a chair), print the bottom texture first.
+	\item Print the texture to the corresponding space on the screen
+	\item Repeat steps 2-4 for all characters in the array.
+\end{enumerate}
+
+Alternatives: If texture PNG file has not been specified in the switch statement or in the JSON file, the parser will not be able to print it to the screen which can either create a program error or print a black space to the screen.
+
+\textbf{Find Instance of Char}
+
+Summary: Parses the array for the first instance of a specified character.
+
+Actors: Parser
+
+Preconditions: The .map file has been loaded into the grid array.
+
+Goal: Find the first instance of an object on the map. Used for finding the player/other players on the map.
+
+Steps:
+\begin{enumerate}
+	\item Move to the first space on the map.
+	\item Check the character of that space against the one searching for.
+	\item If the two are the same, return the x,y position,if not move to the next location.
+	\item If no match is found in map, return the position 0,0.
+\end{enumerate}
+
+\section{Game State}
+
+\textbf{Initialize Game}
+
+Summary: A new instance of the game is started. The program sets the starting system variables.
+
+Actors: Player, system
+
+Goal: To set the system variables for a new instance of the game.
+
+Steps:
+\begin{enumerate}
+	\item User runs the program, starting new instance of the game.
+	\item The system creates a new instance of the game state.
+	\item System runs through initialization sequence, setting all system variables to their starting values.
+	\item Game is launched.
+\end{enumerate}
+
+\textbf{Add New Player}
+
+Summary: A new player entity is created, and assigned a GameID for use in the client-server communications.
+
+Actors: Player, System
+
+Preconditions: There is an available GameID to be assigned to the new player entity.
+
+Related Use Cases: Add New Monster
+
+Goal: To add new player instance to the game.
+
+Steps:
+\begin{enumerate}
+	\item New game is started by the player, player instance is created within initialization.
+	\item A game ID is requested for the new player entity.
+	\item Player is placed on the map.
+	\item The player is assigned the new ID.
+	\item The player is added to the list of drawable items on the map.
+	\item The drawable list is updated and sorted.
+\end{enumerate}
+
+\textbf{Add New Monster} 
+
+Summary: New instance of a monster entity is added to the game. 
+
+Actors: System
+
+Preconditions: There is an available GameID to be assigned to the new monster entity.
+
+Related Use Cases: Add New Player
+
+Goal: To add a new monster instance to the game.
+
+Steps:
+\begin{enumerate}
+	\item System requests for new instance of a monster entity.
+	\item A game ID is requested for the new monster entity.
+	\item Monster is placed on the map.
+	\item The monster is assigned the new ID.
+	\item The monster is added to the list of drawable items on the map.
+	\item The drawable list is updated and sorted.
+\end{enumerate}
+
+\textbf{Remove Player}
+
+Summary: Player dies in the game, which in turn needs to delete the player instance from the game. Can also be invoked by a player leaving a networked multiplayer game.
+
+Actors: System
+
+Preconditions: The player entity requested to be removed is recognized by the system.
+
+Related Use Cases: Remove Monster
+
+Goal: To remove an instance of a player entity from the game.
+
+Steps:
+\begin{enumerate}
+	\item Player exits the game, or dies.
+	\item System removes the player instance from the list of drawables.
+	\item System removes the player from the lists of players.
+\end{enumerate}
+
+\textbf{Remove Monster}
+
+Summary: Monster is killed by a player in the game. This creates the need for the specific instance for that monster to be removed from the game.
+
+Actors: System
+
+Preconditions: The monster entity requested to be removed is recognized by the system.
+
+Related Use Cases: Remove Player
+
+Goal: To remove an instance of a monster entity from the game.
+
+Steps:
+\begin{enumerate}
+	\item Monster is killed by a player in the game.
+	\item System removes the monster instance from the list of drawables.
+	\item System removes the monster from the lists of players.
+\end{enumerate}
