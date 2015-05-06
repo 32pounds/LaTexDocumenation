@@ -18,19 +18,21 @@ include the player, monster, communications, game state and map.
 \section{Map}
 
 \textbf{Update Map}
-Summary: When the player moves, the map updates to show the player on the new position of the map
+\textbf{Goal}: To update the map after player or monster movement.
 
-Actors:
+\textbf{Actors}:
 Renderer, Game State
 
-Preconditions: In order for the map to be updated, the game window must
+\textbf{Preconditions}: In order for the map to be updated, the game window must
 be open and the original map render must be completed.
 
-Goal: To update the map after player or monster movement.
+\textbf{Summary}: 
+When the player moves, the map updates to show the player on the new position of the map
+\textbf{Goal}: To update the map after player or monster movement.
 
-Related Use Cases: Draw Map.
+\textbf{Related Use Cases}: Draw Map.
 	
-Steps: 
+\textbf{Steps}: 
 \begin{enumerate}
 	\item Player or monster changes position on the map.
 	\item Game state checks validity of movement.
@@ -39,20 +41,27 @@ Steps:
 	\item Map is redrawn to the screen with updated positions.
 \end{enumerate}
 	
-Alternative: Player/monster movement is determined invalid in step two, map is not updated.
+\textbf{Alternative}: 
+Player/monster movement is determined invalid in step two, map is not updated.
 
-\textbf{Draw Map}
-Summary: The renderer is called and parses through the map text file, prints corresponding PNG images to the game window to create the visual map.
+\begin{subsection}{Draw Map}
 
-Actors: Renderer
+\textbf{Goal}: 
+Print the map to the game window.
 
-Preconditions: The JSON file containing the tile specifics and the text file with the ASCII map are located in the assets file. Map has been loaded into the array grid.
+\textbf{Actors}: 
+Renderer
 
-Goal: Print the map to the game window.
+\textbf{Preconditions}: 
+The JSON file containing the tile specifics and the text file with the ASCII map are located in the assets file. Map has been loaded into the array grid.
 
-Related Use Cases: Update Map
+\textbf{Summary}: 
+The renderer is called and parses through the map text file, prints corresponding PNG images to the game window to create the visual map.
 
-Steps:
+\textbf{Related Use Cases}: 
+Update Map
+
+\textbf{Steps}:
 \begin{enumerate}
 	\item For each character in the grid array it selects the position of the grid
 	\item The character is searched for the corresponding tile texture
@@ -61,19 +70,24 @@ Steps:
 	\item Repeat steps 2-4 for all characters in the array.
 \end{enumerate}
 
-Alternatives: If texture PNG file has not been specified in the switch statement or in the JSON file, the parser will not be able to print it to the screen which can either create a program error or print a black space to the screen.
+\textbf{Alternatives}: 
+If texture PNG file has not been specified in the switch statement or in the JSON file, the parser will not be able to print it to the screen which can either create a program error or print a black space to the screen.
 
 \textbf{Find Instance of Char}
 
-Summary: Parses the array for the first instance of a specified character.
+\textbf{Goal}: 
+Find the first instance of an object on the map. Used for finding the player/other players on the map.
 
-Actors: Parser
+\textbf{Actors}: 
+Parser
 
-Preconditions: The .map file has been loaded into the grid array.
+\textbf{Preconditions}: 
+The .map file has been loaded into the grid array.
 
-Goal: Find the first instance of an object on the map. Used for finding the player/other players on the map.
+\textbf{Summary}: 
+Parses the array for the first instance of a specified character.
 
-Steps:
+\textbf{Steps}:
 \begin{enumerate}
 	\item Move to the first space on the map.
 	\item Check the character of that space against the one searching for.
@@ -85,13 +99,16 @@ Steps:
 
 \textbf{Initialize Game}
 
-Summary: A new instance of the game is started. The program sets the starting system variables.
+\textbf{Goal}: 
+To set the system variables for a new instance of the game.
 
-Actors: Player, system
+\textbf{Actors}: 
+Player, system
 
-Goal: To set the system variables for a new instance of the game.
+\textbf{Summary}: 
+A new instance of the game is started. The program sets the starting system variables.
 
-Steps:
+\textbf{Steps}:
 \begin{enumerate}
 	\item User runs the program, starting new instance of the game.
 	\item The system creates a new instance of the game state.
@@ -101,17 +118,24 @@ Steps:
 
 \textbf{Add New Player}
 
-Summary: A new player entity is created, and assigned a GameID for use in the client-server communications.
+\textbf{Summary}: 
+A new player entity is created, and assigned a GameID for use in the client-server communications.
 
-Actors: Player, System
+\textbf{Actors}: 
+Player, System
 
-Preconditions: There is an available GameID to be assigned to the new player entity.
+\textbf{Preconditions}: 
+There is an available GameID to be assigned to the new player entity.
 
-Related Use Cases: Add New Monster
+\textbf{Related Use Cases}: 
+Add New Monster
 
-Goal: To add new player instance to the game.
+\textbf{Goal}:
+Create new player entity with client-server communications.
 
-Steps:
+
+
+\textbf{Steps}:
 \begin{enumerate}
 	\item New game is started by the player, player instance is created within initialization.
 	\item A game ID is requested for the new player entity.
@@ -123,17 +147,22 @@ Steps:
 
 \textbf{Add New Monster} 
 
-Summary: New instance of a monster entity is added to the game. 
+\textbf{Goal}: 
+To add a new monster instance to the game.
 
-Actors: System
+\textbf{Actors}: 
+System
 
-Preconditions: There is an available GameID to be assigned to the new monster entity.
+\textbf{Preconditions}: 
+There is an available GameID to be assigned to the new monster entity.
 
-Related Use Cases: Add New Player
+\textbf{Related Use Cases}: 
+Add New Player
 
-Goal: To add a new monster instance to the game.
+\textbf{Summary}: 
+New instance of a monster entity is added to the game. 
 
-Steps:
+\textbf{Steps}:
 \begin{enumerate}
 	\item System requests for new instance of a monster entity.
 	\item A game ID is requested for the new monster entity.
@@ -145,17 +174,22 @@ Steps:
 
 \textbf{Remove Player}
 
-Summary: Player dies in the game, which in turn needs to delete the player instance from the game. Can also be invoked by a player leaving a networked multiplayer game.
+\textbf{Goal}: 
+To remove an instance of a player entity from the game.
 
-Actors: System
+\textbf{Actors}: 
+System
 
-Preconditions: The player entity requested to be removed is recognized by the system.
+\textbf{Preconditions}: 
+The player entity requested to be removed is recognized by the system.
 
-Related Use Cases: Remove Monster
+\textbf{Related Use Cases}: 
+Remove Monster
 
-Goal: To remove an instance of a player entity from the game.
+\textbf{Summary}: 
+Player dies in the game, which in turn needs to delete the player instance from the game. Can also be invoked by a player leaving a networked multiplayer game.
 
-Steps:
+\textbf{Steps}:
 \begin{enumerate}
 	\item Player exits the game, or dies.
 	\item System removes the player instance from the list of drawables.
@@ -164,19 +198,111 @@ Steps:
 
 \textbf{Remove Monster}
 
-Summary: Monster is killed by a player in the game. This creates the need for the specific instance for that monster to be removed from the game.
+\textbf{Goal}: 
+To remove an instance of a monster entity from the game.
 
-Actors: System
+\textbf{Actors}: 
+System
 
-Preconditions: The monster entity requested to be removed is recognized by the system.
+\textbf{Preconditions}: 
+The monster entity requested to be removed is recognized by the system.
 
-Related Use Cases: Remove Player
+\textbf{Related Use Cases}: 
+Remove Player
 
-Goal: To remove an instance of a monster entity from the game.
+\textbf{Summary}: 
+Monster is killed by a player in the game. This creates the need for the specific instance for that monster to be removed from the game.
 
-Steps:
+\textbf{Steps}:
 \begin{enumerate}
 	\item Monster is killed by a player in the game.
 	\item System removes the monster instance from the list of drawables.
 	\item System removes the monster from the lists of players.
 \end{enumerate}
+
+\begin{subsection}{Player Movement}
+\textbf{Actors}:
+Player
+
+\textbf{Goal}:
+Simple movement across the map.
+
+\textbf{Preconditions}:
+\begin{enumerat}
+\item The tile the player is moving to must be walkable.
+\item The tile must not be a portal.
+\end{enumerate}
+
+\textbf{Summary}:
+The player can traverse the level until he/she reaches an obstacle or wall.
+
+\textbf{Related Use Cases}:
+All overworld interactions are extended by this use case. Combat and Level Transfer are 
+examples.
+
+\textbf{Steps}:
+\begin{enumerate}
+\item The player chooses a direction designated by the movement keys.
+\item The input handler checks to see if the move is legal.
+\item The player continues to move around the area until an obstacle or wall is reached.
+\end{enumerate}
+\end{subsection}
+
+\begin{subsection}{Level Transfer}
+\textbf{Actors}:
+Player
+
+\textbf{Goal}:
+Transportation from level 1 to level 2.
+
+\textbf{Preconditions}:
+\begin{enumerate}
+\item The tile the player is moving from must be walkable.
+\end{enumerate}
+
+\textbf{Summary}:
+The player has found the portal tile and would like to tranfer to or from each level
+
+\textbf{Related Use Cases}:
+Player Movement
+
+\textbf{Steps}:
+\begin{enumerate}
+\item The player chooses a direction designated by the movement keys.
+\item The input handler checks to see if the move is legal.
+\item The player moves to a transport tile.
+\item The input handler checks to see if the transport tile is vacant.
+\item The player is moved to the next/previous level.
+\end{enumerate}
+\end{subsection}
+
+
+\begin{subsection}{Combat}
+\textbf{Actors}:
+Player(s), Enemy Entity(-ies)
+
+\textbf{Goal}:
+The Player encounters an enemy and starts combat.
+
+\textbf{Preconditions}:
+\begin{enumerate}
+\item The Player and entity have tried to access the same tile.
+\end{enumerate}
+
+\textbf{Summary}:
+Either the player or entity have collided, depending on the entity, the player either lives or dies.
+
+\textbf{Steps}:
+\begin{enumerate}
+\item If the player is stronger than the entity, the entity will die.
+\item Players score will be incremented by 1 point.
+\end{enumerate}
+
+\textbf{Alternatives}:
+\begin{enumerate}
+\item If the entity is stronger than the player, the player will die.
+\item Players score will be recorded.
+\item Player will return to Main Menu Screen.
+\end{enumerate}
+\end{subsection}
+\end{document}
