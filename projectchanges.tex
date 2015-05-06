@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{Project Changes}
+\author{32 Pounds}
+
+
+Initially our project design was based primarily on working to fulfill homework requirements and trying to keep everything scrum based.  For our group most of scrum work was new, really implementing project design was something most of us haven't done.  Our typical work load was code, code, and more code.  At the beginning this seemed to be a setback for our team, we had trouble focusing on setting up requirements, use cases, and class diagrams instead of just jumping straight into code.  The workload wasn't necessary unbearable or hard, it was just a different process than most of us were used to.  As a team we thought that it would have been easier to code and then set up these diagrams based on our code, but when setting up a business idea you must have an actual plan before you have the code, so this was essential.  
+ 
+Lets move to project design.
+We had high hopes for our game which was acceptable but later in the semester was not very feasible.  This was ok because this class isn't necessarily based on the project outcome but really learning to work by the scrum techniques and to incorporate software design principles. We were about half way through the semester with very little coding done, design was in place but we were waiting on implementing anything due to the lack of knowledge of what the next homework was going to be. Basically half way through the semester we had nothing but design and a main menu. Previous students who took CS383 warned us of choosing a game because it seemed to be more difficult than expected.  Most likely because expectations are high when it comes to games and experience in making them is somewhat low.  For our group our experience varied, we have a couple very good programmers and others that aren't as efficient.  Java wasn't necessarily a “first” language for most of us so having to learn java and work on a fairly difficult project was somewhat tough.  As a team we diverted, some worked primarily on code while others worked on map, sprite art, documentation, and other necessary tasks.  
+
+Lack of time and experience seemed to hinder us from the initial game design we had developed.  This was expected, we had to adapt and pick what we deemed to be most important from our backlog.  This is where we chose to diverge from a very developed storyline and work more into networking.  Networking was something our team wasn't very confident with so we decided it would be beneficial for us to work on that rather than playing with player and quests and such.
+
+We decided to keep our initial documentation and also to make current documentation to see how things varied throughout the semester.  Here are the designs that changed the most throughout the semester.
+
+\begin{enumerate}
+\item “Player” expectation was high
+\item Gameplay i.e quests, factions, inventory
+\item Multiplayer
+\end{enumerate}
+
+\begin{subsection}{Player Expectations}
+Initially we had a couple of different ideas drawn out for our main player character.  We wanted a player inventory, player skills, and a faction or group that the player could join.  We decided to that this would mean that we would need to incorporate a very defined story line that was single player heavy, which we did not want to do. The ideas for the player were scratched do to the fact that we would rather create a better multiplayer environment than a single player environment.
+\end{subsection}
+
+\begin{subsection}{Advanced Gameplay}
+Gameplay is something where the idea seems so easy but the implementation takes much more thought.  So much needed to be implemented before we started gameplay that we never really got around to it.  For instance, our game was structured for single player until we decided to reroute to multiplayer.  The gameplay is different for a single player than it is for multiplayer in our game.  Before we can completely work on the gameplay we wanted i.e quests, combat, factions, we needed inventory, player health, moving monsters, and also monsters that react to your movement which is more difficult than one would think. We ended up with making a gameplay in which you run around killing bugs that have invaded your office space, some bugs attack you, others dont. 
+\end{subsection}
+
+\begin{subsection}{Multiplayer}
+Multiplayer was were we put most of our dedication. It became a project fork around 
+homework 6.  We needed to change the way our code worked for us to be able to run multiplayer so we decided to fall away from a heavy single player and work more into creating a basic but multiplayer enabled game.  We needed to decide what to include in and how to send our packets.  We chose to send the gamestate through a UDP packet at 60 packets
+per second.
+
+
+ 
