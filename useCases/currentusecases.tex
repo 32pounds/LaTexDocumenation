@@ -1,0 +1,85 @@
+\begin{subsection}{Player Movement}
+\textbf{Actors}:
+Player
+
+\textbf{Goal}:
+Simple movement across the map.
+
+\textbf{Preconditions}:
+\begin{enumerat}
+\item The tile the player is moving to must be walkable.
+\item The tile must not be a portal.
+\end{enumerate}
+
+\textbf{Summary}:
+The player can traverse the level until he/she reaches an obstacle or wall.  
+
+\textbf{Related Use Cases}:
+All overworld interactions are extended by this use case. Combat and Level Transfer are examples.
+
+\textbf{Steps}:
+\begin{enumerate}
+\item The player chooses a direction designated by the movement keys.
+\item The input handler checks to see if the move is legal.
+\item The player continues to move around the area until an obstacle or wall is reached.
+\end{enumerate}
+\end{subsection}
+
+\begin{subsection}{Level Transfer}
+\textbf{Actors}:
+Player
+
+\textbf{Goal}:
+Transportation from level 1 to level 2.
+
+\textbf{Preconditions}:
+\begin{enumerat}
+\item The tile the player is moving from must be walkable.
+\end{enumerate}
+
+\textbf{Summary}:
+The player has found the portal tile and would like to tranfer to or from each level
+
+\textbf{Related Use Cases}:
+Player Movement
+
+\textbf{Steps}:
+\begin{enumerate}
+\item The player chooses a direction designated by the movement keys.
+\item The input handler checks to see if the move is legal.
+\item The player moves to a transport tile.
+\item The input handler checks to see if the transport tile is vacant.
+\item The player is moved to the next/previous level.
+\end{enumerate}
+\end{subsection}
+
+\begin{subsection}{Combat}
+\textbf{Actors}:
+Player(s), Enemy Entity(-ies)
+
+\textbf{Goal}:
+The Player encounters an enemy and starts combat.
+
+\textbf{Preconditions}:
+\begin{enumerate}
+\item The Player and entity have tried to access the same tile. 
+\end{enumerate}
+
+\textbf{Summary}:
+Either the player or entity have collided, depending on the entity, the player either lives
+or dies.
+
+\textbf{Steps}:
+\begin{enumerate}
+\item If the player is stronger than the entity, the entity will die.
+\item Players score will be incremented by 1 point.
+\end{enumerate}
+
+\textbf{Alternatives}:
+\begin{enumerate}
+\item If the entity is stronger than the player, the player will die.
+\item Players score will be recorded.
+\item Player will return to Main Menu Screen.
+\end{enumerate}
+\end{subsection}
+
