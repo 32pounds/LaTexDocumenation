@@ -1,0 +1,334 @@
+\documentclass[12pt]{report}
+\usepackage{titling}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+\geometry{margin=1in}
+\begin{document}
+\begin{chapter}{jUnit Testing}
+\begin{section}{Comms}
+\begin{subsection}{GameID Test}
+\begin{lstlisting}
+
+public class GameIDTest
+{
+    LwjglApplication lwjglApplication;
+    @Before
+    public void before() throws Exception {
+    }
+
+    @After
+    public void after() throws Exception{
+    }
+
+    @Test
+    public void testGameIDGeneration() throws Exception{
+        ArrayList<GameID> seen = new ArrayList<GameID>();
+        for (int i=0; i<200; i++) {
+            GameID n = new GameID();
+            assertTrue(``check previous values'', !seen.contains(n));
+            seen.add(n);
+        }
+    }
+
+    @Test
+    public void testCharTranslation() throws Exception{
+        GameID origin = new GameID();
+        char   idChar = origin.toChar();
+        GameID result = new GameID(idChar);
+        assertTrue(``Test GameID translation'', result.equals(origin));
+
+        origin = new GameID((Number)42);
+        idChar = origin.toChar();
+        result = new GameID(idChar);
+        assertTrue(``Test GameID translation'', result.equals(origin));
+    }
+
+
+}
+
+\end{lstlisting}
+\end{subsection}
+
+\begin{subsection}{Parser Tester}
+\begin{lstlisting}
+public class ParserTest
+{
+    LwjglApplication lwjglApplication;
+
+    public void before() throws Exception
+    {
+        if (lwjglApplication == null)
+        {
+            LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+            config.title = ``Test'';
+            config.width = 960;
+            config.height = 576;
+            lwjglApplication = new LwjglApplication(new ApplicationAdapter()
+            {
+                @Override
+                public void create()
+                {
+                    super.create();
+                }
+            }, config);
+        }
+    }
+
+  /**                                                                                  \
+    * Method: Parse(Command[] commands)
+    */
+    @Test
+    public void testParseCommands() throws Exception
+    {
+        Command[] commands = new Command[3];
+        commands[0] = new DummyCmd();
+        commands[1] = new DummyCmd();
+        commands[2] = new DummyCmd();
+
+        String result = new Parser(new GameState(new Map())).Parse(commands);
+
+        assertEquals(``3,com.comms.DummyCmd:test,com.comms.DummyCmd:test,com.comms.DummyC\
+m\                                                                                        
+d:test,'', result);
+    }
+
+   /**
+     * Method: DeParseCommands(String data)
+     */
+    @Test
+    public void testDeParseCommands() throws Exception
+    {
+        String test = ``3,com.comms.DummyCmd:test,com.comms.DummyCmd:test,com.comms.Dummy\
+C\                                                                                        
+md:test,'';
+
+        Command[] result = new Parser(new GameState(new Map())).DeParseCommands(test);
+
+        assertEquals(``com.comms.DummyCmd:test'', new String(result[0].getData()));
+        assertEquals(``com.comms.DummyCmd:test'', new String(result[1].getData()));
+        assertEquals(``com.comms.DummyCmd:test'', new String(result[2].getData()));
+    }
+
+   /**
+    * Method: Parse(Entity[] entities)
+    */
+    @Test
+    public void testParseEntities() throws Exception
+    {
+        String resultString = ``0, ,0,2,2,@,0,2,3,%,0,2,#,&,0,2,'';                       
+
+        Entity[] entities = new Entity[4];
+
+        Entity entity = new Entity(new GameState(new Map()), ``0'');
+        entity.assignID(new GameID(' '));
+        entity.setYPos(2);
+        entity.setXPos(0);
+        entities[0] = entity;
+
+        entity = new Entity(new GameState(new Map()), ``2'');
+        entity.assignID(new GameID('@'));
+        entity.setYPos(2);
+        entity.setXPos(0);
+        entities[1] = entity;
+
+        entity = new Entity(new GameState(new Map()), ``3'');
+        entity.assignID(new GameID('%'));                                                 
+        entity.setYPos(2);
+        entity.setXPos(0);
+        entities[2] = entity;
+
+        entity = new Entity(new GameState(new Map()), ``#'');
+        entity.assignID(new GameID('&'));
+        entity.setYPos(2);
+        entity.setXPos(0);
+        entities[3] = entity;
+
+        String result = new Parser(new GameState(new Map())).Parse(entities);
+
+        org.junit.Assert.assertEquals(resultString, result);
+    }
+    
+    /**
+     * Method: DeParse(String data)                                                      \
+     */
+    @Test
+    public void testDeParse() throws Exception
+    {
+        Pair<Entity[],Command[]> pair = new Parser(new GameState(new Map())).DeParse(``4,\
+0\
+, ,0,22,2,@,0,2,3,%,0,2,#,&,0,2,3,com.comms.DummyCmd:test,com.comms.DummyCmd:test,com.com\
+\                                                                                         
+  ms.DummyCmd:test,'');
+        Entity[] entities = pair.getKey();
+        Command[] result = pair.getValue();
+
+        assertEquals(entities[0].getImageCode(), ``0'');
+        assertEquals(entities[0].getID().toChar(), ' ');
+        assertEquals(entities[0].getYPos(), 22);
+        assertEquals(entities[0].getXPos(), 0);
+
+        assertEquals(entities[1].getImageCode(), ``2'');
+        assertEquals(entities[1].getID().toChar(), '@');
+        assertEquals(entities[1].getYPos(), 2);
+	      assertEquals(entities[1].getXPos(), 0);
+
+        assertEquals(entities[2].getImageCode(), ``3'');
+        assertEquals(entities[2].getID().toChar(), '%');                                  
+        assertEquals(entities[2].getYPos(), 2);
+        assertEquals(entities[2].getXPos(), 0);
+
+        assertEquals(entities[3].getImageCode(), ``#'');
+        assertEquals(entities[3].getID().toChar(), '&');
+        assertEquals(entities[3].getYPos(), 2);
+        assertEquals(entities[3].getXPos(), 0);
+
+        assertEquals(``com.comms.DummyCmd:test'', new String(result[0].getData()));
+        assertEquals(``com.comms.DummyCmd:test'', new String(result[1].getData()));
+        assertEquals(``com.comms.DummyCmd:test'', new String(result[2].getData()));
+
+    }
+
+\end{lstlisting}
+\end{subsection}
+
+\begin{subsection}{Command Memento}
+\begin{lstlisting}
+    
+    @Test
+public void testPacketize() throws Exception {
+    GameID testID = new GameID();
+    Direction testDir = Direction.NORTH;
+    Command orig = new MoveCmd(testID, testDir);
+
+    char[] data = orig.packetize();
+
+    Command result = Command.parse(data);
+
+    assertTrue(``Packetization class test'', result.getClass()==orig.getClass());
+    MoveCmd mres = (MoveCmd) result;
+    assertTrue(``Direction test'', mres.getDirection().equals(testDir));
+    assertTrue(``Actor ID test'' , mres.getActorID().equals(testID));
+}
+
+
+\end{lstlisting}
+\end{subsection}
+\end{section}
+
+\begin{section}{Renderer Tests}
+\begin{subsection}{Sprite Storage Tests}
+\begin{lstlisting}
+public class SpriteStorageTest
+{
+
+    LwjglApplication lwjglApplication;
+
+    @Before
+    public void before() throws Exception
+    {
+        if(lwjglApplication == null)
+        {
+            LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+            config.title = ``Test'';
+            config.width = 960;
+            config.height = 576;
+            lwjglApplication = new LwjglApplication(new ApplicationAdapter()
+            {
+                @Override
+                public void create()
+                {
+                    super.create();
+                }
+            }, config);
+        }
+    }
+    
+    @After
+    public void after() throws Exception
+    {
+        lwjglApplication.exit();
+    }
+
+    /**                                                                                  \
+     * Method: getInstance()                                                             \
+     */
+    @Test
+    public void testGetInstance() throws Exception
+    {
+        assertNotNull(SpriteStorage.getInstance());
+    }
+
+    /**                                                                                  \
+     * Method: loadAssets()                                                              \
+     */
+    @Test
+    public void testLoadAssets() throws Exception
+    {
+        try
+        {
+            SpriteStorage.getInstance().loadAssets();
+            assertTrue(``SpriteStorage loaded assets without error'', true);
+        } catch (Exception e)
+        {
+            assertTrue(e.getMessage(), false);
+        }
+    }
+
+    /**                                                                                  \  
+     * Method: getTexture(String code)                                                   \
+     */
+    @Test
+    public void testGetTexture() throws Exception
+    {
+        assertNotNull(SpriteStorage.getInstance().getTexture(`` ``));                     
+        assertNotNull(SpriteStorage.getInstance().getTexture(``X''));
+        assertNotNull(SpriteStorage.getInstance().getTexture(``^''));
+        assertNotNull(SpriteStorage.getInstance().getTexture(``v''));
+        assertNotNull(SpriteStorage.getInstance().getTexture(``@''));
+        assertNotNull(SpriteStorage.getInstance().getTexture(``Thomas''));
+        assertNotNull(SpriteStorage.getInstance().getTexture(``L''));
+        assertNotNull(SpriteStorage.getInstance().getTexture(``D''));
+        assertNotNull(SpriteStorage.getInstance().getTexture(``R''));
+        assertNotNull(SpriteStorage.getInstance().getTexture(``C''));
+        assertNotNull(SpriteStorage.getInstance().getTexture(``M''));
+        assertNotNull(SpriteStorage.getInstance().getTexture(``S''));
+        assertNotNull(SpriteStorage.getInstance().getTexture(``.''));
+        assertNotNull(SpriteStorage.getInstance().getTexture(``|''));
+        assertNotNull(SpriteStorage.getInstance().getTexture(``l''));
+        assertNotNull(SpriteStorage.getInstance().getTexture(``d''));
+        assertNotNull(SpriteStorage.getInstance().getTexture(``r''));
+        assertNotNull(SpriteStorage.getInstance().getTexture(``c''));
+        assertNotNull(SpriteStorage.getInstance().getTexture(``s''));
+        assertNotNull(SpriteStorage.getInstance().getTexture(``T''));
+        assertNotNull(SpriteStorage.getInstance().getTexture(``/''));
+    }
+}
+
+\end{lstlisting}
+\end{subsection}
+\end{section}
+\end{chapter}
+\end{document}
