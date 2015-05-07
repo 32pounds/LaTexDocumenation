@@ -693,4 +693,150 @@ include the player, monster, communications, game state and map.
      \end{subsection}
     \end{section}
   \end{chapter}
+  
+  %
+  %  Starting Class Diagrams
+  %
+  
+  \begin{chapter}{Initial Project Design: Class Diagrams}
+   \begin{section}{Combat and stuff}
+    \begin{subsection}{Combat}
+      \textbf{Jordan Lynn, Derek Snyder} \\
+      Summary: When any player or NPC is fighting one another.\\
+    
+      Steps:
+      \begin{enumerate}
+       \item Initiation or Aggro.
+       \item Cool down on current attack begins.
+       \item Damage is taken and dealt, totals for these values are deducted from health.
+       \item If either player or NPC has zero health the combat ends.
+      \end{enumerate}
+    \end{subsection}
+    
+    \begin{subsection}{Initiation and Aggro}
+      Summary: Player strikes other party to begin combat or aggro, when the player becomes too close to an aggressive NPC.\\
+      Preconditions: Two parties are within striking distance of each other. % Look into map/movement for intiation.
+    \end{section}
+    
+    \begin{subsection}{Cool-down}
+      Summary: The minimum amount of time a player must wait after using an weapon/ability again. The duration of cool-down is based off of the weapon/ability used..\\ % See weapon swapping
+      Preconditions: Player has used an weapon/ability.\\
+    
+     \begin{enumerate}
+       \item Cool-down starts.
+       \item Cool-down ends after preset amount of time.
+     \end{enumerate}
+     Alternative: Player swapped weapon/ability while cool-down was active, thus resetting cool-down. \textit{See weapon swapping.}
+    \end{subsection}
+    
+    \begin{subsection}{Damage}
+     Summary: The amount of hit points to decrements from the player or NPC's health. This varies between weapons and abilities.\\
+    
+     Preconditions: Strike must have landed on target.
+    
+     Alternative: The attack does not hit the intended target and instead misses.\textit{See Missing.}
+    \end{subsection}
+    
+    \begin{subsection}{Missing}
+    Summary: When a player launches an attack and the attack doesn't land on the target.\\
+    
+    Preconditions: The player must have initiated an attack or as been attacked through aggro.\\
+    Alternative: The attack lands on intended target. \textit{See Damage}
+    \end{subsection}
+    
+    \textbf{Diagram}
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{combat.jpg}
+	
+\end{section}
+    
+\begin{section} {Player Class Summary}
+ Upon starting the game, the user is assigned a base character(sales) for level 1 (training). After completion of level 1 the user may now choose between the following class of characters: Accountant(Heavy) -- IT(Distance) -- HR(Mage) -- Sales (Base).  Every class has four attributes with one attribute that caters specifically each class.\\ 
+\begin{itemize}
+\item \textbf{Strength} which is specialized to Accountants\\ 
+\item \textbf{Speed} which is specialized to Sales\\ 
+\item \textbf{Focus} which is specialized to IT\\ 
+\item \textbf{Synergy} which is specialized to HR\\  
+\end{itemize}
+Specialization to each character makes upgrading attributes cheaper/easier for that character.\\
+
+\textbf{\large{Accountant}}
+\begin{itemize}
+  \item Weapon: Roll of Quarters
+  \item Miss percent: Constant with specialization -- High miss percentage with non-specialization weapon
+  \item Cool-down Time: Standard (1 second) -- lowers with level increase % see player use cases
+  \item An increase in Power Attribute -- Increase in Strike damage \\
+\end{itemize}
+
+\textbf{\large{IT}} 
+\begin{itemize}
+  \item Weapon: Floppy Disc Toss
+  \item Miss percent: Low with specialization - High miss percentage with non-specialization weapon
+  \item Cool-down Time: Average (1.5 seconds) -- lowers with level increase
+  \item An increase in Focus Attribute -- Increase in disc toss accuracy (miss percent lowers)\\
+\end{itemize}
+
+\textbf{\large{HR}}
+\begin{itemize}
+  \item Weapon: Wand Pen (Spells)
+  \item Miss percent: Constant with specialization - High miss percentage with non-specialization weapon
+  \item Cool-down Time: High (2 seconds) -- lowers with level increase
+  \item An increase in Synergy Attribute -- Increase in spell duration\\
+\end{itemize}
+
+\textbf{\large{Sales}}
+\begin{itemize}
+  \item Weapon: Stapler
+  \item Miss percent: Constant with specialization - high miss percentage with non-specialization 
+  \item Cool-down Time: Low (.5 seconds) -- lowers with level increase
+  \item An increase in Speed attribute -- decrease in cool-down time
+\end{itemize}
+\end{section}
+
+
+\begin{section}{Bureaucracy - Positive and Negative Attention}
+\textbf{Madeleine Brennan, Elizabeth Hernandez}
+
+\textbf{Diagram:}
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Class_Diagram.png}\\
+
+\textbf{Description:}
+
+Bureaucracy deals with interactions between entities in the game, with the biggest interaction within this category being quests. The diagram above visually shows the classes that are related to receiving and completing quests. This relates to bureaucracy because completing quests will help achieve higher approval ratings with the faction that hosts the quest.
+
+The root class is titled "Entity" and defines basic features of all characters in the game.
+The classes "NPC" and "PC", which stand for "non-player character" and "player character" respectively, are extensions of the Entity class. 
+Each PC will track the state of their quests in a Quest Log. 
+The Quest Log will consist of 0 to many quests.
+Each Quest consists of 1 to many quest Stages.
+Stages hold requirements and rewards for each step of progression in its parent Quest.
+Each Stage is held by an NPC.
+A PC must engage in Dialog with an NPC in order to gain and advance through Stages of their Quests.
+\end{section}
+
+\begin{section}{Map and Movement}
+\textbf{Brett Menzies, Gabriel Giovanini de Souze}
+
+\textbf{diagram:}
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{map_and_movement.png}\\
+\textbf{Description:}
+The map subsystem revolves around the\`{ }Map'' class,
+which is composed of a\`{ }Layout'' and a\`{ }Tile set'',
+ and aggregates sets of ``Item Position'' and ``Player Position'' classes.
+ A\`{ }Renderer'' class requires an instance of a\`{ }Map'';
+  Its other connections are outside the scope of this diagram.
+  A\`{ }Tile set'' aggregates ``Tiles'' (fixed size map tiles) and 
+   ``Sprites'' (Other images drawn on a map, like items and characters) for use by the map and rendering code.
+    Each ``Item position'' object represents the position and sprite id of items that have been dropped on the map.
+    ``Character position'' acts similarly, except it can be modified by\`{ }input'', which represents 
+     networked, npc, and local player inputs for the purposes of this diagram.
+
+     \chapter{The Player}
+     \textbf{Michael Mueller, Alexia Doramus}\\
+
+     \noindent\textbf{Diagram:}\\
+     \includegraphics[width=\textwidth]{playerclass.png}\\
+
+     \noindent\textbf{Description:}\\
+     The player class is an aggregate of multiple parts. It consists of ``health'', ``experience'', ``reputation'', and it owns an ``inventory''. The player class can also be assigned a\`{ }mission''. The\`{ }inventory'' is part of a stack that keeps track of the multiple items, including: ``weapons'', ``quest items'', ``armor'', and ``potions''. The\`{ }player'' is part of a stack which can consist of up to 28 players. The stack that is an aggregation of the players is part of the game.
+ \end{section}
 \end{document}
