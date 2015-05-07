@@ -1,0 +1,658 @@
+\documentclass[12pt]{report}
+\usepackage{titling}
+\usepackage{geometry}
+\usepackage{graphicx}
+
+\geometry{margin=1in}
+\begin{document}
+\title{Final Documentation for 32 Pounds\\ \vspace{2 mm} {\large CS 383: Software Engineering}}
+
+\author{32 Pounds}
+\date{\today}
+\maketitle
+\clearpage
+
+\chapter{Initial Project Design: Use Cases}
+This chapter presents the initial use cases based off the major systems in the game. These categories
+include the player, monster, communications, game state and map.
+  
+  \begin{section}{Player Use Cases}
+    \begin{subsection}{Speak with NPC}
+      \textbf{Actors}:
+      Player, NPC
+
+      \textbf{Goal}:
+      Player wishes to speak with an NPC in order to gain information or recieve 
+      a quest.
+
+      \textbf{Preconditions}:
+      \begin{enumerate}
+        \item The player is adjacent to an NPC.
+        \item The NPC has an available speak interact command
+      \end{enumerate}
+
+      \textbf{Summary}:
+      The player communicates with an NPC that is occupying the nearby space 
+      in the world. Communication will add new game information and/or start
+      a new quest.
+
+      \textbf{Related Use Cases}:
+      This use case extends the Interact with Coworker use case, and will be 
+      connected to use cases coorelating to interacting with NPCs through 
+      dialog.
+
+      \textbf{Steps}:
+      \begin{enumerate}
+        \item Player selects NPC to interact with
+        \item Player selects the speak function from the interact menu
+        \item Information is written to the screen
+        \item If necessary, input will be selected from options on the screen
+	      to allow player to respond to NPC.
+      \end{enumerate}
+    \end{subsection}
+
+
+
+    \begin{subsection}{Picking Up/Placing Items in Inventory}
+      \textbf{Actors}:
+      Player
+
+      \textbf{Goal}:
+      Player wishes to move item from world space into their inventory.
+
+      \textbf{Preconditions}
+      \begin{enumerate}
+        \item Player occupies space with object
+        \item Player has an empty slot in their inventory
+      \end{enumerate}
+
+      \textbf{Summary}:
+      The player comes into contact with an object within the world 
+      space, moves it from the world space to their inventory.
+
+      \textbf{Related Use Cases}:
+      This use case extends the World Entity Interaction use case, and the
+      use case upgrading items extends from it.
+
+      \textbf{Steps}:
+      \begin{enumerate}
+        \item Player moves to the same space as a visible object occupying world
+	      space.
+        \item Player selects the place object in inventory selection from 
+	      interaction menu.
+        \item Object appears in single slot of players inventory.
+        \item Object is removed from the world space.
+      \end{enumerate}
+
+      \textbf{Alternatives}:
+      Player does not have an empty slot in their inventory, no action is
+      taken (see \textit{Preconditions}).
+    \end{subsection}
+  \end{section}
+
+
+
+    \begin{subsection}{Movement through Area}
+      \textbf{Actors}:
+      Player
+
+      \textbf{Goal}:
+      To cross the current area and enter the next one.
+
+      \textbf{Preconditions}:
+      \begin{enumerate}
+        \item The tile the player is moving to must not have an obstacle. 
+        \item If there is an item required to move on to the next area, the player must possess it.
+      \end{enumerate}
+
+      \textbf{Summary}:
+      The player will traverse across an area until an exit tile is reached. If he/she encounters a wall or solid object, they player will not move in the direction of the obstacle. When the player stands on an exit tile, the will move to an new area.
+
+      \textbf{Related Use Cases}:
+      All overworld interactions are extended by this use case. Talking to npcs, combat, and picking up items are examples.
+
+      \textbf{Steps}:
+      \begin{enumerate}
+        \item The player chooses a direction designated by the movement keys.
+        \item The input handler checks to see if the move is legal.
+        \item The player continues to move around the area until an exit tile is reached.
+        \item The player moves onto the exit tile to take him/her to the next areal.
+      \end{enumerate}
+    \end{subsection}
+    
+    \begin{subsection}{Inventory Item Use}
+      \textbf{Actors}:
+      Player, Inventory, Useable Item
+
+      \textbf{Preconditions}:
+      \begin{enumerate}
+      \item Inventory belongs to Player.
+      \item Item is in Inventory.
+      \item Item is useable from the Inventory
+      \item Player inputs the use command, selecting Item for use.
+    \end{enumerate}
+
+      \textbf{Summary}:
+      The Player uses the Item in their Inventory. The Item produces its
+      use effect.
+
+      \textbf{Related Use Cases}
+      All Useable Item Uses extend this use case. Examples would be quaffing
+      a potion or reading a note.
+
+      \textbf{Steps}:
+      \begin{enumerate}
+        \item Player selects Item from Inventory.
+        \item System enables the input of the use command.
+        \item Player inputs the use command.
+        \item System evaluates the effect of the use command on the
+        Useable Item and updates the Item's state accordingly.
+      \end{enumerate}
+    \end{subsection}
+
+
+    \begin{subsection}{Interact with a Coworker}
+      \textbf{Actors}:
+      Player, NPC
+
+      \textbf{Goal}:
+      The Player wishes to perform an interaction with an NPC.
+
+      \textbf{Preconditions}:
+      \begin{enumerate}
+        \item The Player is adjacent to the NPC.
+      \end{enumerate}
+
+      \textbf{Summary}:
+      The Player interacts with an NPC occupying space in the World. The
+      interaction may or may not cause a state change for either the Player or
+      the NPC relationship.
+
+      \textbf{Related Use Cases}:
+      All specific NPC interactions extend this use case. Examples include
+      modifying a relationship or managing quests.
+
+      \textbf{Steps}:
+      \begin{enumerate}
+        \item The Player inputs the interact command, selecting the NPC.
+        \item The System performs the interaction, gathing additional input from the
+	      Player as necessary.
+      \end{enumerate}
+    \end{subsection}
+
+
+    \begin{subsection}{World Entity Interaction}
+
+      \textbf{Actors}:
+      Player, Interactable Entity
+
+      \textbf{Preconditions}:
+      \begin{enumerate}
+        \item Player is adjacent to the Interactable Entity.
+        \item Player inputs the interact command, selecting the Interactable Entity.
+      \end{enumerate}
+
+      \textbf{Summary}:
+      The Player interacts with the Entity occupying space in the World. The Entity 
+      produces its interactive effect. 
+
+      \textbf{Related Use Cases}
+      All World Entity Interactions extend this use case. Examples would be 
+      opening a door or operating a switch.
+
+      \textbf{Steps}:        
+      \begin{enumerate}
+        \item Player moves adjacent to an Interactable Entity.
+        \item System enables the input of the interact command.
+        \item Player inputs the interact command.
+        \item System evaluates the effect of the interact command on the
+        Interactable Entity and updates the Entity's state accordingly.
+        \item Player moves away from the Interactable Entity.
+        \item System disables the input of the interact command.
+      \end{enumerate}
+    \end{subsection}
+  \end{section}
+
+
+  \begin{section}{Combat}
+    \begin{subsection}{Engage Combat}
+      \textbf{Actors}:
+      Player(s), Enemy Entity(-ies)
+
+      \textbf{Goal}:
+      The Player encounters an enemy and starts combat.
+
+      \textbf{Preconditions}:
+      \begin{enumerate}
+        \item The Player is adjacent to the Enemy Entity.
+        \item The Player has the Combat flag enabled.
+        \item The Enemy Entity has the Combat flag enabled.
+      \end{enumerate}
+
+      \textbf{Summary}:
+      The Player engages in combat with an Enemy Entity occupying space in the
+      World. Combat is carried out in Turns, with each combatant selecting a Move
+      each Turn, which are then resolved in order from the entity with the
+      highest Speed value to the entity with the lowest Speed value. When every
+      member of one side has their Health reduced to 0, then the other side is
+      victorious. If the Player(s) won, then go to use case \textit{Player
+      Victory}. If the Player(s) lost, then go to use case \textit{Player Death}.
+
+      \textbf{Related Use Cases}:
+      This use case is a parent to \textit{Combat Turn}. The use cases
+      \textit{Player Wins Battle} or \textit{Player Death} immediately follow. This
+      use case can be optionally extended to allow for alternate forms of combat.
+
+      \textbf{Steps}:
+      \begin{enumerate}
+        \item The Player inputs the Begin Combat command, \textit{or} the Enemy
+        Entity begins combat with the Player.
+        \item The System disables the Player's Combat flag.
+        \item The use case Cmbat Turn is now performed.
+      \end{enumerate}
+    \end{subsection}
+
+
+    \begin{subsection}{Combat Turn}
+      \textbf{Actors}:
+      Player(s), Enemy Entity(-ies)
+
+      \textbf{Goal}:
+      The Player seeks to reduce the Enemy Entity's Health to 0 and keep their
+      own Health above 0.
+
+      \textbf{Preconditions}:
+      \begin{enumerate}
+        \item The Player is currently in the \textit{Engage Combat} use case.
+        \item The Enemy Entity is currently in the \textit{Engage Combat} use case.
+      \end{enumerate}
+
+      \textbf{Summary}:
+      The Player and the Enemy Entity both select a Move. Moves are then
+      sequentially executed, with the Move selected by the Entity with the
+      largest Speed value being evaluated first, and the Move selected by the
+      Entity with the smallest Speed value being evaluated last.
+
+      \textbf{Related Use Cases}:
+      This use case is a child of the \textit{Engage Combat} use case, and can be
+      optionally extended to provide alternative combat mechanics.
+
+      \textbf{Steps}:
+      \begin{enumerate}
+        \item The System prompts the Player with a list of legal Moves.
+        \item The Player selects a Move.
+        \item The Enemy entity selects a Move.
+        \item The System evaluates all Moves, in order of Speed.
+        \item The System updates the state of each Entity as appropriate.
+        \item If the Enemy Entity has a Health of 0, go to use case \textit{Player
+      	Victory}.
+        \item If the Player has a Health of 0, go to use case \textit{Player
+	      Death}.
+      \end{enumerate}
+    \end{subsection} 
+
+      \textbf{Steps}:
+      \begin{enumerate}
+
+        \item \label{combat:turn} Perform use case \textit{Combat Turn}.
+        \item If neither side has been reduced to 0 Health,
+	       go to step \ref{combat:turn}.
+        \item If the Enemy Entity has a Health of 0, go to use case \textit{Player
+        Victory}.
+        \item If the Player has a Health of 0, go to use case \textit{Player
+	      Death}.
+      \end{enumerate}
+
+
+    \begin{subsection}{Player Wins Battle}
+      \textbf{Actors}:
+      Player(s), Enemy Entity(-ies)
+
+      \textbf{Goal}:
+      The Player seeks to list and distribute the benefits of victory.
+
+      \textbf{Preconditions}:
+      \begin{enumerate}
+        \item The Player is currently in the \textit{Combat Turn} use case.
+        \item The Player has a Health which is greater than 0.
+        \item The Enemy Entity is currently in the \textit{Combat Turn} use case.
+        \item The Enemy Entity has a Health of 0.
+        \item The \textit{Combat} use case is requesting for the \textit{Player
+	      Victory} use case to be run.
+      \end{enumerate}
+
+      \textbf{Summary}:
+      The Player is informed of any Items or Reputation gained. If multiple
+      Players are present, then they reach an agreement on how the Items are to
+      be distributed.
+
+      \textbf{Related Use Cases}:
+      This use case can only be begun when transitioning from the \textit{Combat Turn}
+      use case.
+
+      \textbf{Steps}:
+      \begin{enumerate}
+        \item The System calculates the Items and/or Reputation gained by the
+	       Player based upon the Enemy Entity.
+        \item The System informs the Player of the Items and/or Reputation gained.
+        \item If there is only one player, go to step \ref{player_victory:end}.
+        \item \label{player_victory:distribute_items} The System allows the Players
+        to distribute the Items gained.
+        \item The Players either agree or do not agree to the distribution.
+        \item If the Players do not agree,
+	      go to step \ref{player_victory:distribute_items}
+        \item \label{player_victory:end} Go to use case \textit{Place Items in
+	      Inventory}.
+      \end{enumerate}
+    \end{subsection}
+  \end{section}
+\end{chapter}
+
+%
+% This is the end of the initial use cases
+%
+
+\begin{chapter}{Current Project Use Cases}
+
+This chapter presents the current use cases based off the major systems in the game. These categories
+include the player, monster, communications, game state and map.
+
+  \begin{section}{Map}
+    \subsection{Update Map}
+      \textbf{Goal}: To update the map after player or monster movement.
+
+      \textbf{Actors}:
+      Renderer, Game State
+
+      \textbf{Preconditions}: In order for the map to be updated, the game window must
+      be open and the original map render must be completed.
+
+      \textbf{Summary}: 
+      When the player moves, the map updates to show the player on the new position of the map
+      \textbf{Goal}: To update the map after player or monster movement.
+
+      \textbf{Related Use Cases}: Draw Map.
+	
+      \textbf{Steps}: 
+      \begin{enumerate}
+	      \item Player or monster changes position on the map.
+	      \item Game state checks validity of movement.
+	      \item Game state is updated to reflect new position
+      	\item Renderer is called to redraw the map.
+	      \item Map is redrawn to the screen with updated positions.
+      \end{enumerate}
+	
+      \textbf{Alternative}: 
+      Player/monster movement is determined invalid in step two, map is not updated.
+
+    \begin{subsection}{Draw Map}
+
+      \textbf{Goal}: 
+      Print the map to the game window.
+
+      \textbf{Actors}: 
+      Renderer
+
+      \textbf{Preconditions}: 
+      The JSON file containing the tile specifics and the text file with the ASCII map are located in the assets file. Map has been loaded into the array grid.
+
+      \textbf{Summary}: 
+      The renderer is called and parses through the map text file, prints corresponding PNG images to the game window to create the visual map.
+
+      \textbf{Related Use Cases}: 
+      Update Map
+
+      \textbf{Steps}:
+      \begin{enumerate}
+	      \item For each character in the grid array it selects the position of the grid
+	      \item The character is searched for the corresponding tile texture
+	      \item If multiple textures are used for a certain tile(i.e. a chair), print the bottom texture first.
+	      \item Print the texture to the corresponding space on the screen
+	      \item Repeat steps 2-4 for all characters in the array.
+      \end{enumerate}
+
+      \textbf{Alternatives}: 
+      If texture PNG file has not been specified in the switch statement or in the JSON file, the parser will not be able to print it to the screen which can either create a program error or print a black space to the screen.
+
+      \textbf{Find Instance of Char}
+
+      \textbf{Goal}: 
+      Find the first instance of an object on the map. Used for finding the player/other players on the map.
+
+      \textbf{Actors}: 
+      Parser
+
+      \textbf{Preconditions}: 
+      The .map file has been loaded into the grid array.
+
+      \textbf{Summary}: 
+      Parses the array for the first instance of a specified character.
+
+      \textbf{Steps}:
+      \begin{enumerate}
+	      \item Move to the first space on the map.
+	      \item Check the character of that space against the one searching for.
+	      \item If the two are the same, return the x,y position,if not move to the next location.
+	      \item If no match is found in map, return the position 0,0.
+      \end{enumerate}
+    \end{subsection}
+
+  \section{Game State}
+
+    \begin{subsection}{Initialize Game}
+
+      \textbf{Goal}: 
+      To set the system variables for a new instance of the game.
+
+      \textbf{Actors}: 
+      Player, system
+
+      \textbf{Summary}: 
+      A new instance of the game is started. The program sets the starting system variables.
+
+      \textbf{Steps}:
+      \begin{enumerate}
+	      \item User runs the program, starting new instance of the game.
+	      \item The system creates a new instance of the game state.
+	      \item System runs through initialization sequence, setting all system variables to their starting values.
+	      \item Game is launched.
+      \end{enumerate}
+    \end{subsection}
+
+    \begin{subsection}{Add New Player}
+
+      \textbf{Summary}: 
+      A new player entity is created, and assigned a GameID for use in the client-server communications.
+
+      \textbf{Actors}: 
+      Player, System
+
+      \textbf{Preconditions}: 
+      There is an available GameID to be assigned to the new player entity.
+
+      \textbf{Related Use Cases}: 
+      Add New Monster
+
+      \textbf{Goal}:
+      Create new player entity with client-server communications.
+
+      \textbf{Steps}:
+      \begin{enumerate}
+	      \item New game is started by the player, player instance is created within initialization.
+	      \item A game ID is requested for the new player entity.
+	      \item Player is placed on the map.
+	      \item The player is assigned the new ID.
+	      \item The player is added to the list of drawable items on the map.
+	      \item The drawable list is updated and sorted.
+      \end{enumerate}
+    \end{subsection}
+    
+    \begin{subsection}{Add New Monster} 
+
+      \textbf{Goal}: 
+      To add a new monster instance to the game.
+
+      \textbf{Actors}: 
+      System
+
+      \textbf{Preconditions}: 
+      There is an available GameID to be assigned to the new monster entity.
+
+      \textbf{Related Use Cases}: 
+      Add New Player
+
+      \textbf{Summary}: 
+      New instance of a monster entity is added to the game. 
+
+      \textbf{Steps}:
+      \begin{enumerate}
+	      \item System requests for new instance of a monster entity.
+	      \item A game ID is requested for the new monster entity.
+	      \item Monster is placed on the map.
+      	\item The monster is assigned the new ID.
+      	\item The monster is added to the list of drawable items on the map.
+      	\item The drawable list is updated and sorted.
+      \end{enumerate}
+    \end{subsection}  
+  
+    \begin{subsection}{Remove Player}
+
+      \textbf{Goal}: 
+      To remove an instance of a player entity from the game.
+
+      \textbf{Actors}: 
+      System
+
+      \textbf{Preconditions}: 
+      The player entity requested to be removed is recognized by the system.
+
+      \textbf{Related Use Cases}: 
+      Remove Monster
+
+      \textbf{Summary}: 
+      Player dies in the game, which in turn needs to delete the player instance from the game. Can also be invoked by a player leaving a networked multiplayer game.
+
+      \textbf{Steps}:
+      \begin{enumerate}
+	      \item Player exits the game, or dies.
+	      \item System removes the player instance from the list of drawables.
+	      \item System removes the player from the lists of players.
+      \end{enumerate}
+    \end{subsection}
+    
+
+    \begin{subsection}{Remove Monster}
+
+      \textbf{Goal}: 
+      To remove an instance of a monster entity from the game.
+
+      \textbf{Actors}: 
+      System
+
+      \textbf{Preconditions}: 
+      The monster entity requested to be removed is recognized by the system.
+
+      \textbf{Related Use Cases}: 
+      Remove Player
+
+      \textbf{Summary}: 
+      Monster is killed by a player in the game. This creates the need for the specific instance for that monster to be removed from the game.
+
+      \textbf{Steps}:
+      \begin{enumerate}
+	      \item Monster is killed by a player in the game.
+	      \item System removes the monster instance from the list of drawables.
+	      \item System removes the monster from the lists of players.
+      \end{enumerate}
+    \end{subsection}
+  \end{section}
+  
+  \begin{section}{Player}
+    \begin{subsection}{Player Movement}
+      \textbf{Actors}:
+      Player
+
+      \textbf{Goal}:
+      Simple movement across the map.
+
+      \textbf{Preconditions}:
+      \begin{enumerat}
+        \item The tile the player is moving to must be walkable.
+        \item The tile must not be a portal.
+      \end{enumerate}
+
+      \textbf{Summary}:
+      The player can traverse the level until he/she reaches an obstacle or wall.
+
+      \textbf{Related Use Cases}:
+      All overworld interactions are extended by this use case. Combat and Level Transfer are 
+      examples.
+
+      \textbf{Steps}:
+      \begin{enumerate}
+        \item The player chooses a direction designated by the movement keys.
+        \item The input handler checks to see if the move is legal.
+        \item The player continues to move around the area until an obstacle or wall is reached.
+      \end{enumerate}
+    \end{subsection}
+
+    \begin{subsection}{Level Transfer}
+      \textbf{Actors}:
+      Player
+
+      \textbf{Goal}:
+      Transportation from level 1 to level 2.
+
+      \textbf{Preconditions}:
+      \begin{enumerate}
+        \item The tile the player is moving from must be walkable.
+      \end{enumerate}
+
+      \textbf{Summary}:
+      The player has found the portal tile and would like to tranfer to or from each level
+
+      \textbf{Related Use Cases}:
+      Player Movement
+
+      \textbf{Steps}:
+      \begin{enumerate}
+        \item The player chooses a direction designated by the movement keys.
+        \item The input handler checks to see if the move is legal.
+        \item The player moves to a transport tile.
+        \item The input handler checks to see if the transport tile is vacant.
+        \item The player is moved to the next/previous level.
+      \end{enumerate}
+    \end{subsection}
+
+
+    \begin{subsection}{Combat}
+      \textbf{Actors}:
+      Player(s), Enemy Entity(-ies)
+
+      \textbf{Goal}:
+      The Player encounters an enemy and starts combat.
+
+      \textbf{Preconditions}:
+      \begin{enumerate}
+        \item The Player and entity have tried to access the same tile.
+      \end{enumerate}
+
+      \textbf{Summary}:
+      Either the player or entity have collided, depending on the entity, the player either lives or dies.
+
+      \textbf{Steps}:
+      \begin{enumerate}
+        \item If the player is stronger than the entity, the entity will die.
+        \item Players score will be incremented by 1 point.
+      \end{enumerate}
+
+      \textbf{Alternatives}:
+      \begin{enumerate}
+        \item If the entity is stronger than the player, the player will die.
+        \item Players score will be recorded.
+        \item Player will return to Main Menu Screen.
+      \end{enumerate}
+     \end{subsection}
+    \end{section}
+  \end{chapter}
+\end{document}
