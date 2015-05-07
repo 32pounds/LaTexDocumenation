@@ -13,21 +13,21 @@
 \clearpage
 
 \begin{chapter}{Player Class Summary}
- Upon starting the game, the user is assigned a base character(sales) for level 1 (training). After completion of level 1 the user may now choose between the following class of characters: Accountant(Heavy) -- IT(Distance) -- HR(Mage) -- Sales (Base).  Every class has four attributes with one attribute that caters specifically each class.\\ 
+ Upon starting the game, the user is assigned a base character(sales) for level 1 (training). After completion of level 1 the user may now choose between the following class of characters: Accountant(Heavy) -- IT(Distance) -- HR(Mage) -- Sales (Base).  Every class has four attributes with one attribute that caters specifically each class. 
 	\begin{itemize}
-	 \item \textbf{Strength} which is specialized to Accountants\\ 
-	 \item \textbf{Speed} which is specialized to Sales\\ 
-	 \item \textbf{Focus} which is specialized to IT\\ 
-	 \item \textbf{Synergy} which is specialized to HR\\  
+	 \item \textbf{Strength} which is specialized to Accountants.
+	 \item \textbf{Speed} which is specialized to Sales.
+	 \item \textbf{Focus} which is specialized to IT.
+	 \item \textbf{Synergy} which is specialized to HR.  
 	\end{itemize}
-	Specialization to each character makes upgrading attributes cheaper/easier for that character.\\
+	Specialization to each character makes upgrading attributes cheaper/easier for that character.
 
 	\textbf{\large{Accountant}}
 	\begin{itemize}
   	 \item Weapon: Roll of Quarters
 	 \item Miss percent: Constant with specialization -- High miss percentage with non-specialization weapon
   	 \item Cooldown Time: Standard (1 second) -- lowers with level increase % see player use cases
-  	 \item An increase in Power Attribute -- Increase in Strike damage \\
+  	 \item An increase in Power Attribute -- Increase in Strike damage 
 	\end{itemize}
 
 	\textbf{\large{IT}} 
@@ -35,7 +35,7 @@
   	 \item Weapon: Floppy Disc Toss
   	 \item Miss percent: Low with specialization - High miss percentage with non-specialization weapon
   	 \item Cooldown Time: Average (1.5 seconds) -- lowers with level increase
-         \item An increase in Focus Attribute -- Increase in disc toss accuracy (miss percent lowers)\\
+         \item An increase in Focus Attribute -- Increase in disc toss accuracy (miss percent lowers)
 	\end{itemize}
 
 	\textbf{\large{HR}}
@@ -43,7 +43,7 @@
   	 \item Weapon: Wand Pen (Spells)
   	 \item Miss percent: Constant with specialization - High miss percentage with non-specialization weapon
   	 \item Cooldown Time: High (2 seconds) -- lowers with level increase
-  	 \item An increase in Synergy Attribute -- Increase in spell duration\\
+  	 \item An increase in Synergy Attribute -- Increase in spell duration
 	\end{itemize}
 
 	\textbf{\large{Sales}}
@@ -277,8 +277,8 @@ include the player, monster, communications, game state and map.
       each Turn, which are then resolved in order from the entity with the
       highest Speed value to the entity with the lowest Speed value. When every
       member of one side has their Health reduced to 0, then the other side is
-      victorious. If the Player(s) won, then go to use case \textit{Player
-      Victory}. If the Player(s) lost, then go to use case \textit{Player Death}.
+      victorious. If the Player(s) won, then go to use case \textit {Player Victory}. 
+      If the Player(s) lost, then go to use case \textit{Player Death}.
 
       \textbf{Related Use Cases}:
       This use case is a parent to \textit{Combat Turn}. The use cases
@@ -326,10 +326,8 @@ include the player, monster, communications, game state and map.
         \item The Enemy entity selects a Move.
         \item The System evaluates all Moves, in order of Speed.
         \item The System updates the state of each Entity as appropriate.
-        \item If the Enemy Entity has a Health of 0, go to use case \textit{Player
-      	Victory}.
-        \item If the Player has a Health of 0, go to use case \textit{Player
-	      Death}.
+        \item If the Enemy Entity has a Health of 0, go to use case \textit{Player Victory}.
+        \item If the Player has a Health of 0, go to use case \textit{Player Death}.
       \end{enumerate}
     \end{subsection} 
 
@@ -339,10 +337,8 @@ include the player, monster, communications, game state and map.
         \item \label{combat:turn} Perform use case \textit{Combat Turn}.
         \item If neither side has been reduced to 0 Health,
 	       go to step \ref{combat:turn}.
-        \item If the Enemy Entity has a Health of 0, go to use case \textit{Player
-        Victory}.
-        \item If the Player has a Health of 0, go to use case \textit{Player
-	      Death}.
+        \item If the Enemy Entity has a Health of 0, go to use case \textit{Player Victory}.
+        \item If the Player has a Health of 0, go to use case \textit{Player Death}.
       \end{enumerate}
 
 
@@ -359,8 +355,7 @@ include the player, monster, communications, game state and map.
         \item The Player has a Health which is greater than 0.
         \item The Enemy Entity is currently in the \textit{Combat Turn} use case.
         \item The Enemy Entity has a Health of 0.
-        \item The \textit{Combat} use case is requesting for the \textit{Player
-	      Victory} use case to be run.
+        \item The \textit{Combat} use case is requesting for the \textit{Player Victory} use case to be run.
       \end{enumerate}
 
       \textbf{Summary}:
@@ -383,12 +378,10 @@ include the player, monster, communications, game state and map.
         \item The Players either agree or do not agree to the distribution.
         \item If the Players do not agree,
 	      go to step \ref{player_victory:distribute_items}
-        \item \label{player_victory:end} Go to use case \textit{Place Items in
-	      Inventory}.
+        \item \label{player_victory:end} Go to use case \textit{Place Items Inventory}.
       \end{enumerate}
     \end{subsection}
   \end{section}
-\end{chapter}
 
 %
 % This is the end of the initial use cases
@@ -618,7 +611,7 @@ include the player, monster, communications, game state and map.
       Simple movement across the map.
 
       \textbf{Preconditions}:
-      \begin{enumerat}
+      \begin{enumerate}
         \item The tile the player is moving to must be walkable.
         \item The tile must not be a portal.
       \end{enumerate}
@@ -668,6 +661,7 @@ include the player, monster, communications, game state and map.
 
 
     \begin{subsection}{Combat}
+      
       \textbf{Actors}:
       Player(s), Enemy Entity(-ies)
 
