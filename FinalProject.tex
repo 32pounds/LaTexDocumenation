@@ -126,11 +126,11 @@ include the player, monster, communications, game state and map.
 
       \textbf{Preconditions}:
       \begin{enumerate}
-      \item Inventory belongs to Player.
-      \item Item is in Inventory.
-      \item Item is useable from the Inventory
-      \item Player inputs the use command, selecting Item for use.
-    \end{enumerate}
+      	\item Inventory belongs to Player.
+      	\item Item is in Inventory.
+      	\item Item is useable from the Inventory
+      	\item Player inputs the use command, selecting Item for use.
+      \end{enumerate}
 
       \textbf{Summary}:
       The Player uses the Item in their Inventory. The Item produces its
@@ -375,11 +375,11 @@ include the player, monster, communications, game state and map.
 	
       \textbf{Steps}: 
       \begin{enumerate}
-	      \item Player or monster changes position on the map.
-	      \item Game state checks validity of movement.
-	      \item Game state is updated to reflect new position
-      	\item Renderer is called to redraw the map.
-	      \item Map is redrawn to the screen with updated positions.
+	 \item Player or monster changes position on the map.
+	 \item Game state checks validity of movement.
+	 \item Game state is updated to reflect new position
+      	 \item Renderer is called to redraw the map.
+	 \item Map is redrawn to the screen with updated positions.
       \end{enumerate}
 	
       \textbf{Alternative}: 
@@ -404,11 +404,11 @@ include the player, monster, communications, game state and map.
 
       \textbf{Steps}:
       \begin{enumerate}
-	      \item For each character in the grid array it selects the position of the grid
-	      \item The character is searched for the corresponding tile texture
-	      \item If multiple textures are used for a certain tile(i.e. a chair), print the bottom texture first.
-	      \item Print the texture to the corresponding space on the screen
-	      \item Repeat steps 2-4 for all characters in the array.
+	\item For each character in the grid array it selects the position of the grid
+        \item The character is searched for the corresponding tile texture
+	\item If multiple textures are used for a certain tile(i.e. a chair), print the bottom texture first.
+	\item Print the texture to the corresponding space on the screen
+	\item Repeat steps 2-4 for all characters in the array.
       \end{enumerate}
 
       \textbf{Alternatives}: 
@@ -430,10 +430,10 @@ include the player, monster, communications, game state and map.
 
       \textbf{Steps}:
       \begin{enumerate}
-	      \item Move to the first space on the map.
-	      \item Check the character of that space against the one searching for.
-	      \item If the two are the same, return the x,y position,if not move to the next location.
-	      \item If no match is found in map, return the position 0,0.
+	\item Move to the first space on the map.
+	\item Check the character of that space against the one searching for.
+	\item If the two are the same, return the x,y position,if not move to the next location.
+	\item If no match is found in map, return the position 0,0.
       \end{enumerate}
     \end{subsection}
 
@@ -452,10 +452,10 @@ include the player, monster, communications, game state and map.
 
       \textbf{Steps}:
       \begin{enumerate}
-	      \item User runs the program, starting new instance of the game.
-	      \item The system creates a new instance of the game state.
-	      \item System runs through initialization sequence, setting all system variables to their starting values.
-	      \item Game is launched.
+	\item User runs the program, starting new instance of the game.
+	\item The system creates a new instance of the game state.
+	\item System runs through initialization sequence, setting all system variables to their starting values.
+	\item Game is launched.
       \end{enumerate}
     \end{subsection}
 
@@ -478,12 +478,12 @@ include the player, monster, communications, game state and map.
 
       \textbf{Steps}:
       \begin{enumerate}
-	      \item New game is started by the player, player instance is created within initialization.
-	      \item A game ID is requested for the new player entity.
-	      \item Player is placed on the map.
-	      \item The player is assigned the new ID.
-	      \item The player is added to the list of drawable items on the map.
-	      \item The drawable list is updated and sorted.
+	\item New game is started by the player, player instance is created within initialization.
+	\item A game ID is requested for the new player entity.
+	\item Player is placed on the map.
+	\item The player is assigned the new ID.
+	\item The player is added to the list of drawable items on the map.
+	\item The drawable list is updated and sorted.
       \end{enumerate}
     \end{subsection}
     
@@ -506,9 +506,9 @@ include the player, monster, communications, game state and map.
 
       \textbf{Steps}:
       \begin{enumerate}
-	      \item System requests for new instance of a monster entity.
-	      \item A game ID is requested for the new monster entity.
-	      \item Monster is placed on the map.
+	\item System requests for new instance of a monster entity.
+	\item A game ID is requested for the new monster entity.
+	\item Monster is placed on the map.
       	\item The monster is assigned the new ID.
       	\item The monster is added to the list of drawable items on the map.
       	\item The drawable list is updated and sorted.
@@ -534,9 +534,9 @@ include the player, monster, communications, game state and map.
 
       \textbf{Steps}:
       \begin{enumerate}
-	      \item Player exits the game, or dies.
-	      \item System removes the player instance from the list of drawables.
-	      \item System removes the player from the lists of players.
+	\item Player exits the game, or dies.
+	\item System removes the player instance from the list of drawables.
+	\item System removes the player from the lists of players.
       \end{enumerate}
     \end{subsection}
     
@@ -560,9 +560,9 @@ include the player, monster, communications, game state and map.
 
       \textbf{Steps}:
       \begin{enumerate}
-	      \item Monster is killed by a player in the game.
-	      \item System removes the monster instance from the list of drawables.
-	      \item System removes the monster from the lists of players.
+	\item Monster is killed by a player in the game.
+	\item System removes the monster instance from the list of drawables.
+	\item System removes the monster from the lists of players.
       \end{enumerate}
     \end{subsection}
   \end{section}
