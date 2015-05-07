@@ -62,12 +62,12 @@ include the player, monster, communications, game state and map.
   
   \begin{section}{Player Use Cases}
     \begin{subsection}{Speak with NPC}
-      \textbf{Actors}:
-      Player, NPC
-
       \textbf{Goal}:
       Player wishes to speak with an NPC in order to gain information or recieve 
       a quest.
+      
+      \textbf{Actors}:
+      Player, NPC
 
       \textbf{Preconditions}:
       \begin{enumerate}
@@ -98,11 +98,11 @@ include the player, monster, communications, game state and map.
 
 
     \begin{subsection}{Picking Up/Placing Items in Inventory}
+       \textbf{Goal}:
+      Player wishes to move item from world space into their inventory.
+      
       \textbf{Actors}:
       Player
-
-      \textbf{Goal}:
-      Player wishes to move item from world space into their inventory.
 
       \textbf{Preconditions}
       \begin{enumerate}
@@ -135,11 +135,11 @@ include the player, monster, communications, game state and map.
 
 
     \begin{subsection}{Movement through Area}
-      \textbf{Actors}:
-      Player
-
       \textbf{Goal}:
       To cross the current area and enter the next one.
+      
+      \textbf{Actors}:
+      Player
 
       \textbf{Preconditions}:
       \begin{enumerate}
@@ -194,11 +194,11 @@ include the player, monster, communications, game state and map.
 
 
     \begin{subsection}{Interact with a Coworker}
-      \textbf{Actors}:
-      Player, NPC
-
       \textbf{Goal}:
       The Player wishes to perform an interaction with an NPC.
+      
+      \textbf{Actors}:
+      Player, NPC
 
       \textbf{Preconditions}:
       \begin{enumerate}
@@ -258,11 +258,12 @@ include the player, monster, communications, game state and map.
 
   \begin{section}{Combat}
     \begin{subsection}{Engage Combat}
+      \textbf{Goal}:
+      The Player encounters an enemy and starts combat.
+      
       \textbf{Actors}:
       Player(s), Enemy Entity(-ies)
 
-      \textbf{Goal}:
-      The Player encounters an enemy and starts combat.
 
       \textbf{Preconditions}:
       \begin{enumerate}
@@ -296,12 +297,12 @@ include the player, monster, communications, game state and map.
 
 
     \begin{subsection}{Combat Turn}
-      \textbf{Actors}:
-      Player(s), Enemy Entity(-ies)
-
-      \textbf{Goal}:
+       \textbf{Goal}:
       The Player seeks to reduce the Enemy Entity's Health to 0 and keep their
       own Health above 0.
+      
+      \textbf{Actors}:
+      Player(s), Enemy Entity(-ies)
 
       \textbf{Preconditions}:
       \begin{enumerate}
@@ -343,11 +344,11 @@ include the player, monster, communications, game state and map.
 
 
     \begin{subsection}{Player Wins Battle}
-      \textbf{Actors}:
-      Player(s), Enemy Entity(-ies)
-
       \textbf{Goal}:
       The Player seeks to list and distribute the benefits of victory.
+      
+      \textbf{Actors}:
+      Player(s), Enemy Entity(-ies)
 
       \textbf{Preconditions}:
       \begin{enumerate}
@@ -404,7 +405,7 @@ include the player, monster, communications, game state and map.
 
       \textbf{Summary}: 
       When the player moves, the map updates to show the player on the new position of the map
-      \textbf{Goal}: To update the map after player or monster movement.
+      
 
       \textbf{Related Use Cases}: Draw Map.
 	
@@ -496,9 +497,9 @@ include the player, monster, communications, game state and map.
 
     \begin{subsection}{Add New Player}
 
-      \textbf{Summary}: 
-      A new player entity is created, and assigned a GameID for use in the client-server communications.
-
+      \textbf{Goal}:
+      Create new player entity with client-server communications.
+     
       \textbf{Actors}: 
       Player, System
 
@@ -507,9 +508,9 @@ include the player, monster, communications, game state and map.
 
       \textbf{Related Use Cases}: 
       Add New Monster
-
-      \textbf{Goal}:
-      Create new player entity with client-server communications.
+      
+      \textbf{Summary}: 
+      A new player entity is created, and assigned a GameID for use in the client-server communications.
 
       \textbf{Steps}:
       \begin{enumerate}
@@ -604,12 +605,13 @@ include the player, monster, communications, game state and map.
   
   \begin{section}{Player}
     \begin{subsection}{Player Movement}
-      \textbf{Actors}:
-      Player
-
+      
       \textbf{Goal}:
       Simple movement across the map.
-
+      
+      \textbf{Actors}:
+      Player
+      
       \textbf{Preconditions}:
       \begin{enumerate}
         \item The tile the player is moving to must be walkable.
@@ -632,11 +634,11 @@ include the player, monster, communications, game state and map.
     \end{subsection}
 
     \begin{subsection}{Level Transfer}
-      \textbf{Actors}:
-      Player
-
+      
       \textbf{Goal}:
       Transportation from level 1 to level 2.
+      \textbf{Actors}:
+      Player
 
       \textbf{Preconditions}:
       \begin{enumerate}
@@ -662,11 +664,11 @@ include the player, monster, communications, game state and map.
 
     \begin{subsection}{Combat}
       
-      \textbf{Actors}:
-      Player(s), Enemy Entity(-ies)
-
       \textbf{Goal}:
       The Player encounters an enemy and starts combat.
+      
+      \textbf{Actors}:
+      Player(s), Enemy Entity(-ies)
 
       \textbf{Preconditions}:
       \begin{enumerate}
