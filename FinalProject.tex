@@ -700,14 +700,14 @@ include the player, monster, communications, game state and map.
   
   \begin{chapter}{Initial Project Design: Class Diagrams}
    \begin{section}{Combat}
-    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{combat.png}
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{./images/combat.png}
 	
    \end{section}
 
    \begin{section}{Bureaucracy - Positive and Negative Attention}
     \textbf{Madeleine Brennan, Elizabeth Hernandez}
 
-    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Class_Diagram.png}\\
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{./images/Class_Diagram.png}\\
 
     \textbf{Description:}
 
@@ -726,7 +726,7 @@ include the player, monster, communications, game state and map.
 \begin{section}{Map and Movement}
     \textbf{Brett Menzies, Gabriel Giovanini de Souze}
 
-    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{map_and_movement.png}\\
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{./images/map_and_movement.png}\\
     \textbf{Description:}
     The map subsystem revolves around the\`{ }Map'' class,
     which is composed of a\`{ }Layout'' and a\`{ }Tile set'',
@@ -743,7 +743,7 @@ include the player, monster, communications, game state and map.
   \begin{section}{Player}
      \textbf{Michael Mueller, Alexia Doramus}\\
 
-     \includegraphics[width=\textwidth]{playerclass.png}\\
+     \includegraphics[width=\textwidth]{./images/playerclass.png}\\
 
      \noindent\textbf{Description:}\\
      The player class is an aggregate of multiple parts. It consists of ``health'', ``experience'', ``reputation'', and it owns an ``inventory''. The player class can also be assigned a\`{ }mission''. The\`{ }inventory'' is part of a stack that keeps track of the multiple items, including: ``weapons'', ``quest items'', ``armor'', and ``potions''. The\`{ }player'' is part of a stack which can consist of up to 28 players. The stack that is an aggregation of the players is part of the game.
