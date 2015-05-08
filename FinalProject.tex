@@ -963,7 +963,7 @@ include the player, monster, communications, game state and map.
     @Test
     public void testParseEntities() throws Exception
     {
-        String resultString = ``0, ,0,2,2,@,0,2,3,%,0,2,#,&,0,2,'';                       
+        String resultString = ``0, ,0,2,2,@,0,2,3,\%,0,2,#,&,0,2,'';                       
 
         Entity[] entities = new Entity[4];
 
@@ -980,7 +980,7 @@ include the player, monster, communications, game state and map.
         entities[1] = entity;
 
         entity = new Entity(new GameState(new Map()), ``3'');
-        entity.assignID(new GameID('%'));                                                 
+        entity.assignID(new GameID('\%'));                                                 
         entity.setYPos(2);
         entity.setXPos(0);
         entities[2] = entity;
@@ -1017,7 +1017,7 @@ include the player, monster, communications, game state and map.
 	assertEquals(entities[1].getXPos(), 0);
 
         assertEquals(entities[2].getImageCode(), ``3'');
-        assertEquals(entities[2].getID().toChar(), '%');                                  
+        assertEquals(entities[2].getID().toChar(), '\%');                                  
         assertEquals(entities[2].getYPos(), 2);
         assertEquals(entities[2].getXPos(), 0);
 
