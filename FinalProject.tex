@@ -35,47 +35,82 @@
 \maketitle
 \clearpage
 
-\begin{chapter}{Player Class Summary}
- Upon starting the game, the user is assigned a base character(sales) for level 1 (training). After completion of level 1 the user may now choose between the following class of characters: Accountant(Heavy) -- IT(Distance) -- HR(Mage) -- Sales (Base).  Every class has four attributes with one attribute that caters specifically each class. 
-	\begin{itemize}
-	 \item \textbf{Strength} which is specialized to Accountants.
-	 \item \textbf{Speed} which is specialized to Sales.
-	 \item \textbf{Focus} which is specialized to IT.
-	 \item \textbf{Synergy} which is specialized to HR.  
-	\end{itemize}
-	Specialization to each character makes upgrading attributes cheaper/easier for that character.
 
-	\textbf{\large{Accountant}}
-	\begin{itemize}
-  	 \item Weapon: Roll of Quarters
-	 \item Miss percent: Constant with specialization -- High miss percentage with non-specialization weapon
-  	 \item Cooldown Time: Standard (1 second) -- lowers with level increase % see player use cases
-  	 \item An increase in Power Attribute -- Increase in Strike damage 
-	\end{itemize}
+\begin{chapter}{Project History}
+	
+	Initially our project design was based primarily on working to fulfill homework requirements and trying to keep everything scrum based.  
+	For our group most of scrum work was new, really implementing project design was something most of us haven't done.  
+	Our typical work load was code, code, and more code.  At the beginning this seemed to be a setback for our team, we had trouble focusing on setting up requirements, use cases, and class diagrams instead of just jumping straight into code.  
+	The workload wasn't necessary unbearable or hard, it was just a different process than most of us were used to.  
+	As a team we thought that it would have been easier to code and then set up these diagrams based on our code, but when setting up a business idea you must have an actual plan before you have the code, so this was essential.  
+	
+	Lets move to project design.
+	We had high hopes for our game which was acceptable but later in the semester was not very feasible.  
+	This was ok because this class isn't necessarily based on the project outcome but really learning to work by the scrum techniques and to incorporate software design principles. 
+	We were about half way through the semester with very little coding done, design was in place but we were waiting on implementing anything due to the lack of knowledge of what the next homework was going to be. 
+	Basically half way through the semester we had nothing but design and a main menu. 
+	Previous students who took CS383 warned us of choosing a game because it seemed to be more difficult than expected.  
+	Most likely because expectations are high when it comes to games and experience in making them is somewhat low.  
+	For our group our experience varied, we have a couple very good programmers and others that aren't as efficient.  
+	Java wasn't necessarily a “first” language for most of us so having to learn java and work on a fairly difficult project was somewhat tough.  
+	As a team we diverted, some worked primarily on code while others worked on map, sprite art, documentation, and other necessary tasks.  
+	
+	Lack of time and experience seemed to hinder us from the initial game design we had developed.  
+	This was expected, we had to adapt and pick what we deemed to be most important from our backlog.  
+	This is where we chose to diverge from a very developed storyline and work more into networking.  
+	Networking was something our team wasn't very confident with so we decided it would be beneficial for us to work on that rather than playing with player and quests and such.
+	
+	We decided to keep our initial documentation and also to make current documentation to see how things varied throughout the semester.  
+	Here are the designs that changed the most throughout the semester.
+	
+	\begin{enumerate}
+		\item Player design
+		\item Advanced gameplay i.e quests, factions, inventory
+		\item Multiplayer
+	\end{enumerate}
+	
+	\begin{subsection}{Player Expectations}
+		Initially we had a couple of different ideas drawn out for our main player character.  
+		We wanted a player inventory, player skills, and a faction or group that the player could join.  
+		We decided to that this would mean that we would need to incorporate a very defined story line that was single player heavy, 
+		which we did not want to do. The ideas for the player were scrapped do to the fact that we would rather create a better 
+		multiplayer environment than a single player environment.
+	\end{subsection}
+	
+	\begin{subsection}{Advanced Gameplay}
+		Gameplay is something where the idea seems so easy but the implementation 
+		takes much more thought.  So much needed to be implemented before we started gameplay 
+		that we never really got around to it.  For instance, our game was structured for single player 
+		until we decided to reroute to multiplayer.  The gameplay was different for a single 
+		player than it is for multiplayer in our game.  Before we can completely work on the 
+		gameplay we wanted i.e quests, combat, factions, we needed inventory, player health, moving monsters,
+		and also monsters that react to your movement which is more difficult than one would think. 
+		We ended up with making a gameplay in which you run around killing bugs that have invaded your office
+		space, some bugs attack you, others dont. 
+	\end{subsection}
+	
+	\begin{subsection}{Multiplayer}
+		Much of the final sprint was dedicated to Multiplayer. It became a project fork around 
+		homework 6.  The decision to focus on multiplayer was motivated by three key reasons: We had spent
+		considerable effort keeping the code base compatible with a multiplayer mode, Many of us were interested
+		in the experience of making a multiplayer game, and we though that we might be the only team to successfully acheive full multiplayer.  We set up a meeting where the details of multiplayer were hashed out, like the structure of our packets.  We chose to send the complete state of the game through a UDP packet at 40 packets
+		per second so that the same packet would apply to all clients, and we don't have to remember which entities have moved.
+	\end{subsection}
+\end{chapter}
 
-	\textbf{\large{IT}} 
-	\begin{itemize}
-  	 \item Weapon: Floppy Disc Toss
-  	 \item Miss percent: Low with specialization - High miss percentage with non-specialization weapon
-  	 \item Cooldown Time: Average (1.5 seconds) -- lowers with level increase
-         \item An increase in Focus Attribute -- Increase in disc toss accuracy (miss percent lowers)
-	\end{itemize}
 
-	\textbf{\large{HR}}
-	\begin{itemize}
-  	 \item Weapon: Wand Pen (Spells)
-  	 \item Miss percent: Constant with specialization - High miss percentage with non-specialization weapon
-  	 \item Cooldown Time: High (2 seconds) -- lowers with level increase
-  	 \item An increase in Synergy Attribute -- Increase in spell duration
-	\end{itemize}
 
-	\textbf{\large{Sales}}
-	\begin{itemize}
-  	 \item Weapon: Stapler
-  	 \item Miss percent: Constant with specialization - high miss percentage with non-specialization 
-  	 \item Cooldown Time: Low (.5 seconds) -- lowers with level increase
-  	 \item An increase in Speed attribute -- decrease in cooldown time
-	\end{itemize}
+\begin{chapter}{Implementation details} 
+ Our game can be run with ``gradle run" from the ``OSGame" directory within our project, or by running the jar file in the top level of our github repository. Both the client and the server are run from the same code, in fact every instance of the game is running a server and a client locally. The game has been tested to work freely within and between Windows, OS X, and Ubuntu and Arch Linux, although there are known issues when running in openJDK 7.
+ 
+ To run our game, simply launch the jar file. Network communications use UDP ports 5050 and 5051. To join a game, press ESC, then ``join game", and then enter the IP address of a computer running another instance of the game. The other instance only needs to be running, it is not necessary for them to press "Host Game" or to even be playing in their local game at the time.
+ 
+ Gradle has been used to manage almost every aspect of the build process. Many team members have used its good, if limited, support for netbeans and eclipse to build from within their IDE.
+ 
+ The code is organized first between the ``core" and the ``desktop" folder. ``core" contains the platform independent code, which is the vast majority of our code base. ``desktop" contains a main class that deals with the specific considerations of launching our game on a desktop computing environment. If we wished to expand to other platforms, only the code within the desktop folder would need rewritten within a new folder. 
+ 
+ Inside of ``core/src" exists most of our game's source code, split between the ``com" with the application code and ``test" with our unit tests. Within ``com" and ``test" are corresponding sets of .java files in a number of different subsystem directories.
+ 
 \end{chapter}
 
 
@@ -771,7 +806,7 @@ include the player, monster, communications, game state and map.
      \noindent\textbf{Description:}\\
      The player class is an aggregate of multiple parts. It consists of ``health'', ``experience'', ``reputation'', and it owns an ``inventory''. The player class can also be assigned a\`{ }mission''. The\`{ }inventory'' is part of a stack that keeps track of the multiple items, including: ``weapons'', ``quest items'', ``armor'', and ``potions''. The\`{ }player'' is part of a stack which can consist of up to 28 players. The stack that is an aggregation of the players is part of the game.
   \end{section}
- 
+  
  \end{chapter}
  \begin{chapter}{Current Project Design: Diagrams}
    \begin{section}{Game State Classes}
@@ -793,70 +828,14 @@ include the player, monster, communications, game state and map.
    \end{section}
  \end{chapter}
  
- \begin{chapter}{Project Changes}
+  \begin{chapter}{Metrics}
+  	We chose to use PMD for our software metrics. Specifically, we invoked the Basic, Code Size, Coupling, and Design rulesets. A detailed output is availible as HTML in the ``PMD" folder of our Documentation git repository. In short, PMD's biggest complaints were the high Cyclomatic Complexity of our monster AI (max of 18), a large number of Law of Demeter violations, and some variables that it suggests should be made ``final".
+  \end{chapter}
  
-   Initially our project design was based primarily on working to fulfill homework requirements and trying to keep everything scrum based.  
-   For our group most of scrum work was new, really implementing project design was something most of us haven't done.  
-   Our typical work load was code, code, and more code.  At the beginning this seemed to be a setback for our team, we had trouble focusing on setting up requirements, use cases, and class diagrams instead of just jumping straight into code.  
-   The workload wasn't necessary unbearable or hard, it was just a different process than most of us were used to.  
-   As a team we thought that it would have been easier to code and then set up these diagrams based on our code, but when setting up a business idea you must have an actual plan before you have the code, so this was essential.  
- 
-   Lets move to project design.
-   We had high hopes for our game which was acceptable but later in the semester was not very feasible.  
-   This was ok because this class isn't necessarily based on the project outcome but really learning to work by the scrum techniques and to incorporate software design principles. 
-   We were about half way through the semester with very little coding done, design was in place but we were waiting on implementing anything due to the lack of knowledge of what the next homework was going to be. 
-   Basically half way through the semester we had nothing but design and a main menu. 
-   Previous students who took CS383 warned us of choosing a game because it seemed to be more difficult than expected.  
-   Most likely because expectations are high when it comes to games and experience in making them is somewhat low.  
-   For our group our experience varied, we have a couple very good programmers and others that aren't as efficient.  
-   Java wasn't necessarily a “first” language for most of us so having to learn java and work on a fairly difficult project was somewhat tough.  
-   As a team we diverted, some worked primarily on code while others worked on map, sprite art, documentation, and other necessary tasks.  
-
-   Lack of time and experience seemed to hinder us from the initial game design we had developed.  
-   This was expected, we had to adapt and pick what we deemed to be most important from our backlog.  
-   This is where we chose to diverge from a very developed storyline and work more into networking.  
-   Networking was something our team wasn't very confident with so we decided it would be beneficial for us to work on that rather than playing with player and quests and such.
-
-   We decided to keep our initial documentation and also to make current documentation to see how things varied throughout the semester.  
-   Here are the designs that changed the most throughout the semester.
-
-   \begin{enumerate}
-    \item Player design
-    \item Advanced gameplay i.e quests, factions, inventory
-    \item Multiplayer
-   \end{enumerate}
-
-  \begin{subsection}{Player Expectations}
-   Initially we had a couple of different ideas drawn out for our main player character.  
-   We wanted a player inventory, player skills, and a faction or group that the player could join.  
-   We decided to that this would mean that we would need to incorporate a very defined story line that was single player heavy, 
-   which we did not want to do. The ideas for the player were scrapped do to the fact that we would rather create a better 
-   multiplayer environment than a single player environment.
-  \end{subsection}
-
-  \begin{subsection}{Advanced Gameplay}
-   Gameplay is something where the idea seems so easy but the implementation 
-   takes much more thought.  So much needed to be implemented before we started gameplay 
-   that we never really got around to it.  For instance, our game was structured for single player 
-   until we decided to reroute to multiplayer.  The gameplay was different for a single 
-   player than it is for multiplayer in our game.  Before we can completely work on the 
-   gameplay we wanted i.e quests, combat, factions, we needed inventory, player health, moving monsters,
-   and also monsters that react to your movement which is more difficult than one would think. 
-   We ended up with making a gameplay in which you run around killing bugs that have invaded your office
-   space, some bugs attack you, others dont. 
-  \end{subsection}
-
-  \begin{subsection}{Multiplayer}
-   Multiplayer was were we put most of our dedication. It became a project fork around 
-   homework 6.  We needed to change the way our code worked for us to be able to run multiplayer 
-   so we decided to fall away from a heavy single player and work more into creating a basic 
-   but multiplayer enabled game.  We needed to decide what to include 
-   in and how to send our packets.  We chose to send the gamestate through a UDP packet at 40 packets
-   per second to each client.
-  \end{subsection}
- \end{chapter}
  
  \begin{chapter}{jUnit Testing}
+ 	Our unit testing was run though gradle's test task, which uses JUnit. Our test code is located within the OSGame/core/src/test directory of our project, and run with "gradle test". A "Passed" or "Failed" message will be printed to the terminal for each test run. Standard error and standard output are also piped to the terminal. Gradle automatically makes a parallelized test runner, so there is no "main" to run our tests from.
+ 	
   \begin{section}{Comms}
    \begin{subsection}{GameID Test}
     \begin{lstlisting}
