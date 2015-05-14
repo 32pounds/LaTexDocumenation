@@ -836,7 +836,7 @@ include the player, monster, communications, game state and map.
  \begin{chapter}{jUnit Testing}
  	Our unit testing was run though gradle's test task, which uses JUnit. Our test code is located within the OSGame/core/src/test directory of our project, and run with "gradle test". A "Passed" or "Failed" message will be printed to the terminal for each test run. Standard error and standard output are also piped to the terminal. Gradle automatically makes a parallelized test runner, so there is no "main" to run our tests from.
  	
-  \begin{section}{Comms}
+  \begin{section}{Comms Tests}
    \begin{subsection}{GameID Test}
     \begin{lstlisting}
 
@@ -1037,6 +1037,12 @@ include the player, monster, communications, game state and map.
     \end{lstlisting}
    \end{subsection}
   \end{section}
+  \begin{section}{Comms Test Results}
+  	test.com.comms.CommandHandlerTest > testAdd PASSED
+
+  	test.com.comms.CommandHandlerTest > testRemove PASSED
+
+  	test.com.comms.CommandHandlerTest > testGetInstance PASSED
 
   \begin{section}{Renderer Tests}
    \begin{subsection}{Sprite Storage Tests}
