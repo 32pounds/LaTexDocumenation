@@ -1038,12 +1038,51 @@ include the player, monster, communications, game state and map.
    \end{subsection}
   \end{section}
   \begin{section}{Comms Test Results}
-  	test.com.comms.CommandHandlerTest \rightarrow {testAdd PASSED}
-
-  	test.com.comms.CommandHandlerTest \rightarrow {testRemove PASSED}
-
-  	test.com.comms.CommandHandlerTest \rightarrow {testGetInstance PASSED}
+  	test.com.comms.CommandHandlerTest > testAdd PASSED
+	test.com.comms.CommandHandlerTest > testRemove PASSED
+	test.com.comms.CommandHandlerTest > testGetInstance PASSED
+  	test.com.comms.DummyCmdTest > testExecute PASSED
+  	test.com.comms.DummyCmdTest > testGetData PASSED
+  	test.com.comms.GameIDTest > testGameIDGeneration PASSED
+  	test.com.comms.GameIDTest > testCharTranslation PASSED
+  	test.com.comms.InputHandlerTest > testTouchUp PASSED
+  	test.com.comms.InputHandlerTest > testKeyDown PASSED
+  	test.com.comms.InputHandlerTest > testKeyUp PASSED
+  	test.com.comms.InputHandlerTest > testMouseMoved PASSED
+  	test.com.comms.InputHandlerTest > testScrolled PASSED
+  	test.com.comms.InputHandlerTest > testTouchDown PASSED
+  	test.com.comms.InputHandlerTest > testKeyTyped PASSED
+  	test.com.comms.InputHandlerTest > testTouchDragged PASSED
+  	test.com.comms.MoveCmdTest > testExecute PASSED
+  	test.com.comms.MoveCmdTest > testGetData PASSED
+  	test.com.comms.MoveCmdTest > testGetDirection PASSED
+  	test.com.comms.OSInputProcessorTest > testTouchUp PASSED
+  	test.com.comms.OSInputProcessorTest > testRemoveInputPorcessor PASSED
+  	test.com.comms.OSInputProcessorTest > testKeyDown PASSED
+  	test.com.comms.OSInputProcessorTest > testKeyUp PASSED
+  	test.com.comms.OSInputProcessorTest > testAddInputPorcessor PASSED
+  	test.com.comms.OSInputProcessorTest > testMouseMoved PASSED
+  	test.com.comms.OSInputProcessorTest > testScrolled PASSED
+	test.com.comms.OSInputProcessorTest > testTouchDown PASSED
+	test.com.comms.OSInputProcessorTest > testKeyTyped PASSED
+	test.com.comms.OSInputProcessorTest > testTouchDragged PASSED
+	test.com.comms.OSInputProcessorTest > testGetInstance PASSED
+	test.com.comms.ParserTest > testParseForEntitiesCommands PASSED
+	test.com.comms.ParserTest > testParseEntities FAILED
+    		java.lang.NullPointerException at ParserTest.java:91
+	test.com.comms.ParserTest > testDePerseEntities FAILED
+    		java.lang.NullPointerException at ParserTest.java:131
+	test.com.comms.ParserTest > testDeParseCommands FAILED
+    		java.lang.NullPointerException at ParserTest.java:74
+	test.com.comms.ParserTest > testParseCommands FAILED
+    		java.lang.NullPointerException at ParserTest.java:61
+	test.com.comms.ParserTest > testDeParse FAILED
+    		java.lang.NullPointerException at ParserTest.java:167
+	test.com.comms.StopCmdTest > testExecute PASSED
+	test.com.comms.StopCmdTest > testGetData PASSED
   \end{section}
+  
+  
   \begin{section}{Renderer Tests}
    \begin{subsection}{Sprite Storage Tests}
     \begin{lstlisting}
@@ -1135,6 +1174,15 @@ include the player, monster, communications, game state and map.
 
     \end{lstlisting}
    \end{subsection}
+  \end{section}
+  \begin{section}{Render Test Results}
+  	test.com.renderer.SpriteStorageTest > testLoadAssets FAILED
+    	com.badlogic.gdx.utils.GdxRuntimeException at SpriteStorageTest.java:37
+        Caused by: com.badlogic.gdx.utils.GdxRuntimeException at SpriteStorageTest.java:37
+    	java.lang.NullPointerException at SpriteStorageTest.java:51
+
+	test.com.renderer.SpriteStorageTest > testGetTexture FAILED
+	java.lang.AssertionError at SpriteStorageTest.java:85
   \end{section}
  \end{chapter}
 \end{document}
