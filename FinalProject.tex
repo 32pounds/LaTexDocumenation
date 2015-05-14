@@ -10,9 +10,9 @@
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
-\lstset{frame=tb,
+\lstset{frame=TB,
   language=Java,
-  aboveskip=3mm,
+  obelisk=3mm,
   belowskip=3mm,
   showstringspaces=false,
   columns=flexible,
@@ -75,7 +75,7 @@
 	
 	Lack of time and experience seemed to hinder us from the initial game design we had developed.  
 	This was expected, we had to adapt and pick what we deemed to be most important from our backlog.  
-	This is where we chose to diverge from a very developed storyline and work more into networking.  
+	This is where we chose to diverge from a very developed story line and work more into networking.  
 	Networking was something our team wasn't very confident with so we decided it would be beneficial for us to work on that rather than playing with player and quests and such.
 	
 	We decided to keep our initial documentation and also to make current documentation to see how things varied throughout the semester.  
@@ -83,7 +83,7 @@
 	
 	\begin{enumerate}
 		\item Player design
-		\item Advanced gameplay i.e quests, factions, inventory
+		\item Advanced game play i.e quests, factions, inventory
 		\item Multiplayer
 	\end{enumerate}
 	
@@ -95,23 +95,23 @@
 		multiplayer environment than a single player environment.
 	\end{subsection}
 	
-	\begin{subsection}{Advanced Gameplay}
-		Gameplay is something where the idea seems so easy but the implementation 
-		takes much more thought.  So much needed to be implemented before we started gameplay 
+	\begin{subsection}{Advanced Game play}
+		Game play is something where the idea seems so easy but the implementation 
+		takes much more thought.  So much needed to be implemented before we started game play 
 		that we never really got around to it.  For instance, our game was structured for single player 
-		until we decided to reroute to multiplayer.  The gameplay was different for a single 
+		until we decided to reroute to multiplayer.  The game play was different for a single 
 		player than it is for multiplayer in our game.  Before we can completely work on the 
-		gameplay we wanted i.e quests, combat, factions, we needed inventory, player health, moving monsters,
+		game play we wanted i.e quests, combat, factions, we needed inventory, player health, moving monsters,
 		and also monsters that react to your movement which is more difficult than one would think. 
-		We ended up with making a gameplay in which you run around killing bugs that have invaded your office
-		space, some bugs attack you, others dont. 
+		We ended up with making a game play in which you run around killing bugs that have invaded your office
+		space, some bugs attack you, others don't. 
 	\end{subsection}
 	
 	\begin{subsection}{Multiplayer}
 		Much of the final sprint was dedicated to Multiplayer. It became a project fork around 
 		homework 6.  The decision to focus on multiplayer was motivated by three key reasons: We had spent
 		considerable effort keeping the code base compatible with a multiplayer mode, Many of us were interested
-		in the experience of making a multiplayer game, and we though that we might be the only team to successfully acheive full multiplayer.  We set up a meeting where the details of multiplayer were hashed out, like the structure of our packets.  We chose to send the complete state of the game through a UDP packet at 40 packets
+		in the experience of making a multiplayer game, and we though that we might be the only team to successfully achieve full multiplayer.  We set up a meeting where the details of multiplayer were hashed out, like the structure of our packets.  We chose to send the complete state of the game through a UDP packet at 40 packets
 		per second so that the same packet would apply to all clients, and we don't have to remember which entities have moved.
 	\end{subsection}
 \end{chapter}
@@ -139,7 +139,7 @@ include the player, monster, communications, game state and map.
   \begin{section}{Player Use Cases}
     \begin{subsection}{Speak with NPC}
       \textbf{Goal}:
-      Player wishes to speak with an NPC in order to gain information or recieve 
+      Player wishes to speak with an NPC in order to gain information or receive 
       a quest.
       
       \textbf{Actors}:
@@ -158,7 +158,7 @@ include the player, monster, communications, game state and map.
 
       \textbf{Related Use Cases}:
       This use case extends the Interact with Coworker use case, and will be 
-      connected to use cases coorelating to interacting with NPCs through 
+      connected to use cases correlating to interacting with NPCs through 
       dialog.
 
       \textbf{Steps}:
@@ -227,7 +227,7 @@ include the player, monster, communications, game state and map.
       The player will traverse across an area until an exit tile is reached. If he/she encounters a wall or solid object, they player will not move in the direction of the obstacle. When the player stands on an exit tile, the will move to an new area.
 
       \textbf{Related Use Cases}:
-      All overworld interactions are extended by this use case. Talking to npcs, combat, and picking up items are examples.
+      All over world interactions are extended by this use case. Talking to npcs, combat, and picking up items are examples.
 
       \textbf{Steps}:
       \begin{enumerate}
@@ -240,13 +240,13 @@ include the player, monster, communications, game state and map.
     
     \begin{subsection}{Inventory Item Use}
       \textbf{Actors}:
-      Player, Inventory, Useable Item
+      Player, Inventory, Usable Item
 
       \textbf{Preconditions}:
       \begin{enumerate}
       	\item Inventory belongs to Player.
       	\item Item is in Inventory.
-      	\item Item is useable from the Inventory
+      	\item Item is Usable from the Inventory
       	\item Player inputs the use command, selecting Item for use.
       \end{enumerate}
 
@@ -255,7 +255,7 @@ include the player, monster, communications, game state and map.
       use effect.
 
       \textbf{Related Use Cases}
-      All Useable Item Uses extend this use case. Examples would be quaffing
+      All Usable Item Uses extend this use case. Examples would be quaffing
       a potion or reading a note.
 
       \textbf{Steps}:
@@ -264,7 +264,7 @@ include the player, monster, communications, game state and map.
         \item System enables the input of the use command.
         \item Player inputs the use command.
         \item System evaluates the effect of the use command on the
-        Useable Item and updates the Item's state accordingly.
+        Usable Item and updates the Item's state accordingly.
       \end{enumerate}
     \end{subsection}
 
@@ -293,7 +293,7 @@ include the player, monster, communications, game state and map.
       \textbf{Steps}:
       \begin{enumerate}
         \item The Player inputs the interact command, selecting the NPC.
-        \item The System performs the interaction, gathing additional input from the
+        \item The System performs the interaction, gathering additional input from the
 	      Player as necessary.
       \end{enumerate}
     \end{subsection}
@@ -302,12 +302,12 @@ include the player, monster, communications, game state and map.
     \begin{subsection}{World Entity Interaction}
 
       \textbf{Actors}:
-      Player, Interactable Entity
+      Player, Intractable Entity
 
       \textbf{Preconditions}:
       \begin{enumerate}
-        \item Player is adjacent to the Interactable Entity.
-        \item Player inputs the interact command, selecting the Interactable Entity.
+        \item Player is adjacent to the Intractable Entity.
+        \item Player inputs the interact command, selecting the Intractable Entity.
       \end{enumerate}
 
       \textbf{Summary}:
@@ -320,12 +320,12 @@ include the player, monster, communications, game state and map.
 
       \textbf{Steps}:        
       \begin{enumerate}
-        \item Player moves adjacent to an Interactable Entity.
+        \item Player moves adjacent to an Intractable Entity.
         \item System enables the input of the interact command.
         \item Player inputs the interact command.
         \item System evaluates the effect of the interact command on the
-        Interactable Entity and updates the Entity's state accordingly.
-        \item Player moves away from the Interactable Entity.
+        Intractable Entity and updates the Entity's state accordingly.
+        \item Player moves away from the Intractable Entity.
         \item System disables the input of the interact command.
       \end{enumerate}
     \end{subsection}
@@ -367,7 +367,7 @@ include the player, monster, communications, game state and map.
         \item The Player inputs the Begin Combat command, \textit{or} the Enemy
         Entity begins combat with the Player.
         \item The System disables the Player's Combat flag.
-        \item The use case Cmbat Turn is now performed.
+        \item The use case Combat Turn is now performed.
       \end{enumerate}
     \end{subsection}
 
@@ -698,7 +698,7 @@ include the player, monster, communications, game state and map.
       The player can traverse the level until he/she reaches an obstacle or wall.
 
       \textbf{Related Use Cases}:
-      All overworld interactions are extended by this use case. Combat and Level Transfer are 
+      All over world interactions are extended by this use case. Combat and Level Transfer are 
       examples.
 
       \textbf{Steps}:
@@ -722,7 +722,7 @@ include the player, monster, communications, game state and map.
       \end{enumerate}
 
       \textbf{Summary}:
-      The player has found the portal tile and would like to tranfer to or from each level
+      The player has found the portal tile and would like to transfer to or from each level
 
       \textbf{Related Use Cases}:
       Player Movement
@@ -842,7 +842,7 @@ include the player, monster, communications, game state and map.
  \end{chapter}
  
   \begin{chapter}{Metrics}
-  	We chose to use PMD for our software metrics. Specifically, we invoked the Basic, Code Size, Coupling, and Design rulesets. A detailed output is availible as HTML in the ``PMD" folder of our Documentation git repository. In short, PMD's biggest complaints were the high Cyclomatic Complexity of our monster AI (max of 18), a large number of Law of Demeter violations, and some variables that it suggests should be made ``final".
+  	We chose to use PMD for our software metrics. Specifically, we invoked the Basic, Code Size, Coupling, and Design rulesets. A detailed output is available as HTML in the ``PMD" folder of our Documentation git repository. In short, PMD's biggest complaints were the high Cyclomatic Complexity of our monster AI (max of 18), a large number of Law of Demeter violations, and some variables that it suggests should be made ``final".
    \begin{section}{Basic}
    \centerline{\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{./pmdBasic.png}}
    \end{section}
@@ -855,7 +855,7 @@ include the player, monster, communications, game state and map.
  
  
  \begin{chapter}{jUnit Testing}
- 	Our unit testing was run though gradle's test task, which uses JUnit. Our test code is located within the OSGame/core/src/test directory of our project, and run with "gradle test". A "Passed" or "Failed" message will be printed to the terminal for each test run. Standard error and standard output are also piped to the terminal. Gradle automatically makes a parallelized test runner, so there is no "main" to run our tests from.
+ 	Our unit testing was run though gradle's test task, which uses JUnit. Our test code is located within the OSGame/core/src/test directory of our project, and run with "gradle test". A "Passed" or "Failed" message will be printed to the terminal for each test run. Standard error and standard output are also piped to the terminal. Gradle automatically makes a paralleled test runner, so there is no "main" to run our tests from.
  	
   \begin{section}{Comms Tests}
    \begin{subsection}{GameID Test}
